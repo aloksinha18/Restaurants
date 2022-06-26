@@ -17,6 +17,7 @@
 		16B2BAC7286908D7002888C0 /* RestaurantsUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16B2BAC6286908D7002888C0 /* RestaurantsUITests.swift */; };
 		16B2BAC9286908D7002888C0 /* RestaurantsUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16B2BAC8286908D7002888C0 /* RestaurantsUITestsLaunchTests.swift */; };
 		16B2BAD928691073002888C0 /* Restaurant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16B2BAD828691073002888C0 /* Restaurant.swift */; };
+		16B2BAE1286912B4002888C0 /* RestaurantLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16B2BAE0286912B4002888C0 /* RestaurantLoader.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -51,6 +52,7 @@
 		16B2BAC6286908D7002888C0 /* RestaurantsUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantsUITests.swift; sourceTree = "<group>"; };
 		16B2BAC8286908D7002888C0 /* RestaurantsUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantsUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		16B2BAD828691073002888C0 /* Restaurant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Restaurant.swift; sourceTree = "<group>"; };
+		16B2BAE0286912B4002888C0 /* RestaurantLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantLoader.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -101,6 +103,7 @@
 		16B2BAA4286908D2002888C0 /* Restaurants */ = {
 			isa = PBXGroup;
 			children = (
+				16B2BADF2869128B002888C0 /* RestaurantLoader */,
 				16B2BAD72869104E002888C0 /* Model */,
 				16B2BAA5286908D2002888C0 /* AppDelegate.swift */,
 				16B2BAA7286908D2002888C0 /* SceneDelegate.swift */,
@@ -136,6 +139,14 @@
 				16B2BAD828691073002888C0 /* Restaurant.swift */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		16B2BADF2869128B002888C0 /* RestaurantLoader */ = {
+			isa = PBXGroup;
+			children = (
+				16B2BAE0286912B4002888C0 /* RestaurantLoader.swift */,
+			);
+			path = RestaurantLoader;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -269,6 +280,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				16B2BAE1286912B4002888C0 /* RestaurantLoader.swift in Sources */,
 				16B2BAD928691073002888C0 /* Restaurant.swift in Sources */,
 				16B2BAAA286908D2002888C0 /* ViewController.swift in Sources */,
 				16B2BAA6286908D2002888C0 /* AppDelegate.swift in Sources */,
