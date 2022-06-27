@@ -11,6 +11,7 @@ class LocalRestaurantLoader {
     
     enum Error: Swift.Error {
         case invalidData
+        case fileNotFound
     }
     
     private let store: RestaurantStore
@@ -28,10 +29,10 @@ class LocalRestaurantLoader {
                     let items = try self.parseResponse(data: data)
                     completion(items)
                 } catch {
-                    completion(.failure(error))
+                    completion(.failure(Error.invalidData))
                 }
             case .failure:
-                completion(.failure(Error.invalidData))
+                completion(.failure(Error.fileNotFound))
             }
         }
     }

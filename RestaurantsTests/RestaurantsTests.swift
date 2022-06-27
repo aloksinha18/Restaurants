@@ -17,12 +17,37 @@ final class LocalRestaurantLoaderTests: XCTestCase {
         sut.load { result in
             switch result {
             case let (.failure(receivedError as NSError)):
-                XCTAssertEqual(receivedError, LocalRestaurantLoader.Error.invalidData as NSError)
+                XCTAssertEqual(receivedError, LocalRestaurantLoader.Error.fileNotFound as NSError)
             default:
                 XCTFail("Expecting failure")
             }
         }
         store.complete(with: anyNSError())
+    }
+    
+    func test_load_fails_on_invalidData() {
+        let store = RestaurantStoreSpy()
+        let sut = LocalRestaurantLoader(store: store)
+        
+        let invalidDataString = """
+                           {
+                           "restaurants":{"name":"Raddisson", "status": "closed", "sortingValues": {"bestMatch":0.0,"newest":96.0,"ratingAverage":4.5,"distance":1190,"popularity":17.0,"averageProductPrice":1536,"deliveryCosts":200,"minCost":1000}}]
+                           }
+                         """
+        
+        let expectation = expectation(description: "wait for restaurant to load")
+        sut.load { result in
+            switch result {
+            case let (.failure(receivedError as NSError)):
+                XCTAssertEqual(receivedError, LocalRestaurantLoader.Error.invalidData as NSError)
+            default:
+                XCTFail("Expecting failure")
+            }
+            expectation.fulfill()
+        }
+        
+        store.complete(with: invalidDataString.data(using: .utf8)!)
+        wait(for: [expectation], timeout: 1.0)
     }
     
     func test_load_sucess_on_retrival() {
