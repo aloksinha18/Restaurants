@@ -7,7 +7,7 @@
 
 import Foundation
 
-class LocalRestaurantLoader {
+class LocalRestaurantLoader: RestaurantLoader {
     
     enum Error: Swift.Error {
         case invalidData

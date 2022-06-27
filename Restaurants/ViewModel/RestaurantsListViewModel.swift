@@ -10,7 +10,7 @@ import Foundation
 class RestaurantsListViewModel {
     
     private let loader: RestaurantLoader
-    private var restaurants: [Restaurant] = []
+    var restaurants: [Restaurant] = []
     
     var onLoad: (([Restaurant])-> Void)?
     var onFail: ((Error)-> Void)?
@@ -24,11 +24,11 @@ class RestaurantsListViewModel {
             guard let self = self else { return }
             switch result {
             case .success(let restaurants):
-                let sortedList = sortRestaurantsByStatus(restaurants)
+                let sortedList = self.sortRestaurantsByStatus(restaurants)
                 self.restaurants = sortedList
-                onLoad?(sortedList)
+                self.onLoad?(sortedList)
             case .failure(let error):
-                onFail?(error)
+                self.onFail?(error)
             }
         }
     }

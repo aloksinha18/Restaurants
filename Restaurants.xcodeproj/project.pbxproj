@@ -22,6 +22,7 @@
 		16B2BAE7286A38CD002888C0 /* RestaurantsListViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16B2BAE6286A38CD002888C0 /* RestaurantsListViewModelTests.swift */; };
 		16B2BAEB286A4D22002888C0 /* RestaurantsListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16B2BAEA286A4D22002888C0 /* RestaurantsListViewModel.swift */; };
 		16B2BAF0286A5B18002888C0 /* RestaurantsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16B2BAEF286A5B18002888C0 /* RestaurantsViewController.swift */; };
+		16B2BAF3286A6277002888C0 /* restaurants.json in Resources */ = {isa = PBXBuildFile; fileRef = 16B2BAF2286A6277002888C0 /* restaurants.json */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -61,6 +62,7 @@
 		16B2BAE6286A38CD002888C0 /* RestaurantsListViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantsListViewModelTests.swift; sourceTree = "<group>"; };
 		16B2BAEA286A4D22002888C0 /* RestaurantsListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantsListViewModel.swift; sourceTree = "<group>"; };
 		16B2BAEF286A5B18002888C0 /* RestaurantsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantsViewController.swift; sourceTree = "<group>"; };
+		16B2BAF2286A6277002888C0 /* restaurants.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = restaurants.json; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -111,6 +113,7 @@
 		16B2BAA4286908D2002888C0 /* Restaurants */ = {
 			isa = PBXGroup;
 			children = (
+				16B2BAF1286A625E002888C0 /* Resource */,
 				16B2BAEC286A5AEC002888C0 /* View */,
 				16B2BAE9286A4D02002888C0 /* ViewModel */,
 				16B2BADF2869128B002888C0 /* RestaurantLoader */,
@@ -183,6 +186,14 @@
 				16B2BAEF286A5B18002888C0 /* RestaurantsViewController.swift */,
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		16B2BAF1286A625E002888C0 /* Resource */ = {
+			isa = PBXGroup;
+			children = (
+				16B2BAF2286A6277002888C0 /* restaurants.json */,
+			);
+			path = Resource;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -290,6 +301,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				16B2BAB2286908D6002888C0 /* LaunchScreen.storyboard in Resources */,
+				16B2BAF3286A6277002888C0 /* restaurants.json in Resources */,
 				16B2BAAF286908D6002888C0 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

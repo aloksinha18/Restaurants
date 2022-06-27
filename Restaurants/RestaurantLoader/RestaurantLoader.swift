@@ -9,6 +9,5 @@ import Foundation
 
 protocol RestaurantLoader {
     typealias Result = Swift.Result<[Restaurant] , Error>
-    func load(completion: (RestaurantLoader.Result) -> Void)
+    func load(completion: @escaping(RestaurantLoader.Result) -> Void)
 }
-

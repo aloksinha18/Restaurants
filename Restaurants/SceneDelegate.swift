@@ -19,7 +19,10 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         guard let windowScene = (scene as? UIWindowScene) else { return }
         window = UIWindow(frame: windowScene.coordinateSpace.bounds)
         window?.windowScene = windowScene
-        let controller = UINavigationController(rootViewController: RestaurantsViewController())
+        let store = LocalRestaurantStore()
+        let loader = LocalRestaurantLoader(store: store)
+        let viewModel = RestaurantsListViewModel(loader: loader)
+        let controller = UINavigationController(rootViewController: RestaurantsViewController(viewModel: viewModel))
         window?.backgroundColor = .white
         window?.rootViewController = controller
         window?.makeKeyAndVisible()
