@@ -8,28 +8,6 @@
 import XCTest
 @testable import Restaurants
 
-class RestaurantsListViewModel {
-    
-    private var restaurants: [Restaurant]
-    
-    init(restaurants: [Restaurant]) {
-        self.restaurants = restaurants
-    }
-    
-    var sortedRestaurants: [Restaurant] {
-        sortRestaurantsByStatus(restaurants)
-    }
-    
-    private func sortRestaurantsByStatus(_ restaurant: [Restaurant]) -> [Restaurant] {
-        restaurants = restaurant.sorted(by: { $0.status > $1.status })
-        return restaurants
-    }
-    
-    func sortedRestaurantsByName(_ input: String)  {
-        restaurants = restaurants.filter { $0.name.localizedCaseInsensitiveContains(input) }
-    }
-}
-
 final class RestaurantsListViewModelTests: XCTestCase {
     
     func test_load_in_sorted_order() {

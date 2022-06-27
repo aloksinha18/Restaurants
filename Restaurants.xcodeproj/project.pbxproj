@@ -21,6 +21,7 @@
 		16B2BAE32869E379002888C0 /* LocalRestaurantsLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16B2BAE22869E379002888C0 /* LocalRestaurantsLoader.swift */; };
 		16B2BAE52869EB00002888C0 /* LocalRestaurantStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16B2BAE42869EB00002888C0 /* LocalRestaurantStore.swift */; };
 		16B2BAE7286A38CD002888C0 /* RestaurantsListViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16B2BAE6286A38CD002888C0 /* RestaurantsListViewModelTests.swift */; };
+		16B2BAEB286A4D22002888C0 /* RestaurantsListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16B2BAEA286A4D22002888C0 /* RestaurantsListViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -59,6 +60,7 @@
 		16B2BAE22869E379002888C0 /* LocalRestaurantsLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalRestaurantsLoader.swift; sourceTree = "<group>"; };
 		16B2BAE42869EB00002888C0 /* LocalRestaurantStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalRestaurantStore.swift; sourceTree = "<group>"; };
 		16B2BAE6286A38CD002888C0 /* RestaurantsListViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantsListViewModelTests.swift; sourceTree = "<group>"; };
+		16B2BAEA286A4D22002888C0 /* RestaurantsListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantsListViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -109,6 +111,7 @@
 		16B2BAA4286908D2002888C0 /* Restaurants */ = {
 			isa = PBXGroup;
 			children = (
+				16B2BAE9286A4D02002888C0 /* ViewModel */,
 				16B2BADF2869128B002888C0 /* RestaurantLoader */,
 				16B2BAD72869104E002888C0 /* Model */,
 				16B2BAA5286908D2002888C0 /* AppDelegate.swift */,
@@ -162,6 +165,14 @@
 			isa = PBXGroup;
 			children = (
 				16B2BAE6286A38CD002888C0 /* RestaurantsListViewModelTests.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		16B2BAE9286A4D02002888C0 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				16B2BAEA286A4D22002888C0 /* RestaurantsListViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -302,6 +313,7 @@
 				16B2BAE52869EB00002888C0 /* LocalRestaurantStore.swift in Sources */,
 				16B2BAAA286908D2002888C0 /* ViewController.swift in Sources */,
 				16B2BAE32869E379002888C0 /* LocalRestaurantsLoader.swift in Sources */,
+				16B2BAEB286A4D22002888C0 /* RestaurantsListViewModel.swift in Sources */,
 				16B2BAA6286908D2002888C0 /* AppDelegate.swift in Sources */,
 				16B2BAA8286908D2002888C0 /* SceneDelegate.swift in Sources */,
 			);
