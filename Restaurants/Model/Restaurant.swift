@@ -26,8 +26,23 @@ struct SortingValues: Codable, Equatable {
     let minCost: Float
 }
 
-enum Status: String,Codable, Equatable {
-    case closed
+enum Status: String, Codable, Equatable, Comparable {
+    case closed = "closed"
     case orderAhead = "order ahead"
     case statusOpen = "open"
+    
+    private var comparisonValue: Int {
+        switch self {
+        case .closed:
+            return 0
+        case .orderAhead:
+            return 1
+        case .statusOpen:
+            return 2
+        }
+    }
+    
+    static func < (lhs: Status, rhs: Status) -> Bool {
+        return lhs.comparisonValue < rhs.comparisonValue
+    }
 }
