@@ -8,5 +8,7 @@
 import Foundation
 
 protocol RestaurantLoader {
-    func load(completion: Result<[Restaurant] , Error>)
+    typealias Result = Swift.Result<[Restaurant] , Error>
+    func load(completion: (RestaurantLoader.Result) -> Void)
 }
+
