@@ -10,31 +10,24 @@ import Foundation
 struct Root: Codable {
     let restaurants: [Restaurant]
 }
-
 // MARK: - Restaurant
-struct Restaurant: Codable {
+struct Restaurant: Codable, Equatable {
     let name: String
     let status: Status
     let sortingValues: SortingValues
 }
 
 // MARK: - SortingValues
-struct SortingValues: Codable {
-    let bestMatch, newest: Int
+struct SortingValues: Codable, Equatable {
+    let bestMatch: Float
+    let newest: Float
     let ratingAverage: Double
-    let distance, popularity, averageProductPrice, deliveryCosts: Int
-    let minCost: Int
+    let distance, popularity, averageProductPrice, deliveryCosts: Float
+    let minCost: Float
 }
 
-enum Status: Codable {
-    
+enum Status: String,Codable, Equatable {
     case closed
-    case orderAhead
-    case statusOpen
-    
-    enum CodingKeys: String, CodingKey {
-        case closed = "closed"
-        case orderAhead = "orderAhead"
-        case statusOpen = "statusOpen"
-    }
+    case orderAhead = "order ahead"
+    case statusOpen = "open"
 }
