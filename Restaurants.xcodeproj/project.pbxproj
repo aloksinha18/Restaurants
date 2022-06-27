@@ -18,6 +18,7 @@
 		16B2BAC9286908D7002888C0 /* RestaurantsUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16B2BAC8286908D7002888C0 /* RestaurantsUITestsLaunchTests.swift */; };
 		16B2BAD928691073002888C0 /* Restaurant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16B2BAD828691073002888C0 /* Restaurant.swift */; };
 		16B2BAE1286912B4002888C0 /* RestaurantLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16B2BAE0286912B4002888C0 /* RestaurantLoader.swift */; };
+		16B2BAE32869E379002888C0 /* LocalRestaurantsLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16B2BAE22869E379002888C0 /* LocalRestaurantsLoader.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -53,6 +54,7 @@
 		16B2BAC8286908D7002888C0 /* RestaurantsUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantsUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		16B2BAD828691073002888C0 /* Restaurant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Restaurant.swift; sourceTree = "<group>"; };
 		16B2BAE0286912B4002888C0 /* RestaurantLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantLoader.swift; sourceTree = "<group>"; };
+		16B2BAE22869E379002888C0 /* LocalRestaurantsLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalRestaurantsLoader.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -145,6 +147,7 @@
 			isa = PBXGroup;
 			children = (
 				16B2BAE0286912B4002888C0 /* RestaurantLoader.swift */,
+				16B2BAE22869E379002888C0 /* LocalRestaurantsLoader.swift */,
 			);
 			path = RestaurantLoader;
 			sourceTree = "<group>";
@@ -283,6 +286,7 @@
 				16B2BAE1286912B4002888C0 /* RestaurantLoader.swift in Sources */,
 				16B2BAD928691073002888C0 /* Restaurant.swift in Sources */,
 				16B2BAAA286908D2002888C0 /* ViewController.swift in Sources */,
+				16B2BAE32869E379002888C0 /* LocalRestaurantsLoader.swift in Sources */,
 				16B2BAA6286908D2002888C0 /* AppDelegate.swift in Sources */,
 				16B2BAA8286908D2002888C0 /* SceneDelegate.swift in Sources */,
 			);

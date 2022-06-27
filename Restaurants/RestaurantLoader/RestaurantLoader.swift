@@ -12,3 +12,6 @@ protocol RestaurantLoader {
     func load(completion: (RestaurantLoader.Result) -> Void)
 }
 
+protocol RestaurantStore {
+    func get(completion: @escaping (Result<Data, Error>)-> Void)
+}
