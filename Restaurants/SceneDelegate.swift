@@ -22,9 +22,17 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         let store = LocalRestaurantStore()
         let loader = LocalRestaurantLoader(store: store)
         let viewModel = RestaurantsListViewModel(loader: loader)
-        let controller = UINavigationController(rootViewController: RestaurantsViewController(viewModel: viewModel))
+        let controller = RestaurantsViewController(viewModel: viewModel)
+        let navigationController = UINavigationController(rootViewController: controller)
+        controller.didStartSearch = { text in
+            viewModel.sortedRestaurantsByName(text)
+        }
+        
+        controller.didCancelSearch = {
+            viewModel.removeSearch()
+        }
         window?.backgroundColor = .white
-        window?.rootViewController = controller
+        window?.rootViewController = navigationController
         window?.makeKeyAndVisible()
     }
 
