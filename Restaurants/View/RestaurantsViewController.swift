@@ -7,8 +7,6 @@
 
 import UIKit
 
-
-
 final class RestaurantsViewController: UITableViewController {
     
     private let viewModel: RestaurantsListViewModel
