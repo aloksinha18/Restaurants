@@ -26,6 +26,7 @@
 		16B2BAF5286A63F2002888C0 /* RestaurantTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16B2BAF4286A63F2002888C0 /* RestaurantTableViewCell.swift */; };
 		16E3EAE4286B9C6C00C1A1CE /* SortListViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16E3EAE3286B9C6C00C1A1CE /* SortListViewModelTests.swift */; };
 		16E3EAE6286BA25900C1A1CE /* SortListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16E3EAE5286BA25900C1A1CE /* SortListViewModel.swift */; };
+		16E3EAE8286BA2E100C1A1CE /* SortListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16E3EAE7286BA2E100C1A1CE /* SortListViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -69,6 +70,7 @@
 		16B2BAF4286A63F2002888C0 /* RestaurantTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantTableViewCell.swift; sourceTree = "<group>"; };
 		16E3EAE3286B9C6C00C1A1CE /* SortListViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SortListViewModelTests.swift; sourceTree = "<group>"; };
 		16E3EAE5286BA25900C1A1CE /* SortListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SortListViewModel.swift; sourceTree = "<group>"; };
+		16E3EAE7286BA2E100C1A1CE /* SortListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SortListViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -193,6 +195,7 @@
 			children = (
 				16B2BAEF286A5B18002888C0 /* RestaurantsViewController.swift */,
 				16B2BAF4286A63F2002888C0 /* RestaurantTableViewCell.swift */,
+				16E3EAE7286BA2E100C1A1CE /* SortListViewController.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -338,6 +341,7 @@
 			files = (
 				16B2BAF5286A63F2002888C0 /* RestaurantTableViewCell.swift in Sources */,
 				16B2BAE1286912B4002888C0 /* RestaurantLoader.swift in Sources */,
+				16E3EAE8286BA2E100C1A1CE /* SortListViewController.swift in Sources */,
 				16B2BAD928691073002888C0 /* Restaurant.swift in Sources */,
 				16B2BAE52869EB00002888C0 /* LocalRestaurantStore.swift in Sources */,
 				16B2BAAA286908D2002888C0 /* ViewController.swift in Sources */,

@@ -37,6 +37,27 @@ enum FilterType: CaseIterable {
             return { $0.sortingValues.minCost > $1.sortingValues.minCost }
         }
     }
+    
+    var description: String {
+        switch self {
+        case .bestMatch:
+            return "Best match"
+        case .newest:
+            return "Newest"
+        case .ratingAverage:
+            return "Rating average"
+        case .distance:
+            return "Distance"
+        case .popularity:
+            return "Popularity"
+        case .averageProductPrice:
+            return "Average product price"
+        case .deliveryCosts:
+            return "Delivery costs"
+        case .minCost:
+            return "Minimum cost"
+        }
+    }
 }
 
 struct SortListViewModel {
