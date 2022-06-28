@@ -31,6 +31,10 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         controller.didCancelSearch = {
             viewModel.removeSearch()
         }
+        
+        controller.didTapFilter = {
+            
+        }
         window?.backgroundColor = .white
         window?.rootViewController = navigationController
         window?.makeKeyAndVisible()

@@ -24,6 +24,7 @@
 		16B2BAF0286A5B18002888C0 /* RestaurantsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16B2BAEF286A5B18002888C0 /* RestaurantsViewController.swift */; };
 		16B2BAF3286A6277002888C0 /* restaurants.json in Resources */ = {isa = PBXBuildFile; fileRef = 16B2BAF2286A6277002888C0 /* restaurants.json */; };
 		16B2BAF5286A63F2002888C0 /* RestaurantTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16B2BAF4286A63F2002888C0 /* RestaurantTableViewCell.swift */; };
+		16E3EAE4286B9C6C00C1A1CE /* FilterListViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16E3EAE3286B9C6C00C1A1CE /* FilterListViewModelTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -65,6 +66,7 @@
 		16B2BAEF286A5B18002888C0 /* RestaurantsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantsViewController.swift; sourceTree = "<group>"; };
 		16B2BAF2286A6277002888C0 /* restaurants.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = restaurants.json; sourceTree = "<group>"; };
 		16B2BAF4286A63F2002888C0 /* RestaurantTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantTableViewCell.swift; sourceTree = "<group>"; };
+		16E3EAE3286B9C6C00C1A1CE /* FilterListViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterListViewModelTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -170,6 +172,7 @@
 			isa = PBXGroup;
 			children = (
 				16B2BAE6286A38CD002888C0 /* RestaurantsListViewModelTests.swift */,
+				16E3EAE3286B9C6C00C1A1CE /* FilterListViewModelTests.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -347,6 +350,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				16E3EAE4286B9C6C00C1A1CE /* FilterListViewModelTests.swift in Sources */,
 				16B2BABD286908D6002888C0 /* RestaurantsTests.swift in Sources */,
 				16B2BAE7286A38CD002888C0 /* RestaurantsListViewModelTests.swift in Sources */,
 			);
