@@ -14,6 +14,7 @@ final class RestaurantsViewController: UITableViewController {
 
     var didStartSearch:((String)-> Void)?
     var didCancelSearch:(()-> Void)?
+    var didTapFilter:(()-> Void)?
 
     init(viewModel: RestaurantsListViewModel) {
         self.viewModel = viewModel
@@ -27,6 +28,7 @@ final class RestaurantsViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationItem.searchController = searchController
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Sort By", style: .plain, target: self, action: #selector(tapFilters))
         searchController.searchResultsUpdater = self
         searchController.searchBar.delegate = self
         tableView.register(RestaurantTableViewCell.self, forCellReuseIdentifier: "Cell")
@@ -38,6 +40,11 @@ final class RestaurantsViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return viewModel.filteredList.count
+    }
+    
+    @objc
+    func tapFilters() {
+        didTapFilter?()
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
