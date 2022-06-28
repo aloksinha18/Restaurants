@@ -1,12 +1,11 @@
 //
-//  FilterListViewModelTests.swift
-//  RestaurantsTests
+//  SortListViewModel.swift
+//  Restaurants
 //
 //  Created by Alok Sinha on 2022-06-28.
 //
 
-import XCTest
-@testable import Restaurants
+import Foundation
 
 enum FilterType: CaseIterable {
     case bestMatch
@@ -40,13 +39,6 @@ enum FilterType: CaseIterable {
     }
 }
 
-struct FilterListViewModel {
+struct SortListViewModel {
     var filters = FilterType.allCases
-}
-
-final class FilterListViewModelTests: XCTestCase {
-    func test_All_filter_items() {
-        let sut = FilterListViewModel()
-        XCTAssertEqual(sut.filters, [.bestMatch, .newest, .ratingAverage, .distance, .popularity, .averageProductPrice, .deliveryCosts, .minCost])
-    }
 }
