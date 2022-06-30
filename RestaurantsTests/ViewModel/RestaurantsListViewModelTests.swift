@@ -19,7 +19,7 @@ final class RestaurantsListViewModelTests: XCTestCase {
     
     func test_load_fails() {
         let loader = MockRestaurantsLoader()
-        let sut = RestaurantsListViewModel(loader: loader)
+        let sut = RestaurantsListViewModel(loader: loader, sortOptionLoader: getSortOptionLoader())
         sut.load()
         let expectation = expectation(description: "wait for restaurant to load")
         sut.onFail = { error in
@@ -56,24 +56,30 @@ final class RestaurantsListViewModelTests: XCTestCase {
     private func test(_ searchText: String? = nil, _ sortOptions: FilterType? = nil, restaurants: [Restaurant], expectedOutput: [Restaurant]) {
         let expectation = expectation(description: "wait for restaurant to load")
         let loader = MockRestaurantsLoader()
-        let sut = RestaurantsListViewModel(loader: loader)
+        let sut = RestaurantsListViewModel(loader: loader, sortOptionLoader: getSortOptionLoader())
         sut.load()
         if let option = sortOptions {
             sut.onLoad = {
                 sut.sortedResultsBySortOption(option)
-                expectation.fulfill()
             }
         } else if let text = searchText {
             sut.onLoad = {
                 sut.sortedRestaurantsByNameAndNotify(text)
-                expectation.fulfill()
+                
             }
         } else {
+            sut.onLoad = {
+                XCTAssertEqual(sut.filteredList, expectedOutput)
+                expectation.fulfill()
+            }
+        }
+        
+        sut.onUpdate = {
+            XCTAssertEqual(sut.filteredList, expectedOutput)
             expectation.fulfill()
         }
         
         loader.complete(with: restaurants)
-        XCTAssertEqual(sut.filteredList, expectedOutput)
         wait(for: [expectation], timeout: 1.0)
     }
     
@@ -168,7 +174,7 @@ final class RestaurantsListViewModelTests: XCTestCase {
         let secondRestaurant = getRestaurant(status: .statusOpen)
         let thirdRestaurant = getRestaurant(status: .orderAhead)
         let loader = MockRestaurantsLoader()
-        let sut = RestaurantsListViewModel(loader: loader)
+        let sut = RestaurantsListViewModel(loader: loader, sortOptionLoader: getSortOptionLoader())
         let expectation = expectation(description: "wait for restaurant to load")
         
         sut.load()
@@ -185,6 +191,17 @@ final class RestaurantsListViewModelTests: XCTestCase {
         wait(for: [expectation], timeout: 1.0)
     }
     
+    func test_load_success_with_persistant_sortType() {
+        let firstClosedRestaurant = getRestaurant(status: .closed, distance: 23)
+        let firstOrderaheadRestaurant = getRestaurant(status: .orderAhead, distance: 46)
+        let firstOpenRestaurant = getRestaurant(status: .statusOpen, distance: 156)
+        let secondRestaurant = getRestaurant(status: .statusOpen, distance: 165)
+        let thirdRestaurant = getRestaurant(status: .orderAhead, distance: 176)
+        let fourthRestaurant = getRestaurant(status: .statusOpen, distance: 1296)
+                
+        test(restaurants: [firstClosedRestaurant,firstOpenRestaurant,firstOrderaheadRestaurant, secondRestaurant, thirdRestaurant, fourthRestaurant], expectedOutput: [firstOpenRestaurant, secondRestaurant, fourthRestaurant, firstOrderaheadRestaurant, thirdRestaurant, firstClosedRestaurant])
+    }
+    
     private func getRestaurant(with name: String = "Restaurant", status: Status, bestMatch: Float = 0.0, newest: Float = 96.0 , ratingAverage: Float = 4.5, distance: Float = 1190, popularity: Float = 17, averageProductPrice: Float = 1536, deliveryCosts: Float = 200, minCost: Float = 1000)-> Restaurant {
         Restaurant(name: name, status: status, sortingValues: SortingValues(bestMatch: bestMatch, newest: newest, ratingAverage: ratingAverage, distance: distance, popularity: popularity, averageProductPrice: averageProductPrice, deliveryCosts: deliveryCosts, minCost: minCost))
     }
@@ -192,8 +209,26 @@ final class RestaurantsListViewModelTests: XCTestCase {
     private func anyNSError() -> NSError {
         NSError(domain: "Test", code: 404)
     }
+    
+    func getSortOptionLoader() -> SortOptionLoader {
+        return MockSortOptionLoader(sortOption: .distance)
+    }
 }
 
+private final class MockSortOptionLoader: SortOptionLoader {
+    
+    private let sortOption: FilterType
+    
+    init(sortOption: FilterType) {
+        self.sortOption = sortOption
+    }
+    
+    func save(_ rawValue: Int) {  }
+    
+    func getFilter() -> FilterType? {
+        return sortOption
+    }
+}
 
 private final class MockRestaurantsLoader: RestaurantLoader {
     
