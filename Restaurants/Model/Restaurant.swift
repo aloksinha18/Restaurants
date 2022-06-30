@@ -15,13 +15,34 @@ struct Restaurant: Codable, Equatable {
     let name: String
     let status: Status
     let sortingValues: SortingValues
+    
+    func value(_ filterType: FilterType) -> Float {
+        switch filterType {
+        case .bestMatch:
+            return sortingValues.bestMatch
+        case .newest:
+            return sortingValues.newest
+        case .ratingAverage:
+            return sortingValues.ratingAverage
+        case .distance:
+            return sortingValues.distance
+        case .popularity:
+            return sortingValues.popularity
+        case .averageProductPrice:
+            return sortingValues.averageProductPrice
+        case .deliveryCosts:
+            return sortingValues.deliveryCosts
+        case .minCost:
+            return sortingValues.minCost
+        }
+    }
 }
 
 // MARK: - SortingValues
 struct SortingValues: Codable, Equatable {
     let bestMatch: Float
     let newest: Float
-    let ratingAverage: Double
+    let ratingAverage: Float
     let distance, popularity, averageProductPrice, deliveryCosts: Float
     let minCost: Float
 }
