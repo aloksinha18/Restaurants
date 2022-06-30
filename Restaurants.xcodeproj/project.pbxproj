@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		162D1463286E1610003CAD39 /* LocalStorageTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 162D1462286E1610003CAD39 /* LocalStorageTests.swift */; };
+		162D1465286E222D003CAD39 /* LocalStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 162D1464286E222D003CAD39 /* LocalStorage.swift */; };
 		16B2BAA6286908D2002888C0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16B2BAA5286908D2002888C0 /* AppDelegate.swift */; };
 		16B2BAA8286908D2002888C0 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16B2BAA7286908D2002888C0 /* SceneDelegate.swift */; };
 		16B2BAAF286908D6002888C0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 16B2BAAE286908D6002888C0 /* Assets.xcassets */; };
@@ -46,6 +48,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		162D1462286E1610003CAD39 /* LocalStorageTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalStorageTests.swift; sourceTree = "<group>"; };
+		162D1464286E222D003CAD39 /* LocalStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalStorage.swift; sourceTree = "<group>"; };
 		16B2BAA2286908D2002888C0 /* Restaurants.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Restaurants.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		16B2BAA5286908D2002888C0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		16B2BAA7286908D2002888C0 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -138,6 +142,7 @@
 			children = (
 				16B2BABC286908D6002888C0 /* RestaurantsTests.swift */,
 				16B2BAE8286A38D1002888C0 /* ViewModel */,
+				162D1462286E1610003CAD39 /* LocalStorageTests.swift */,
 			);
 			path = RestaurantsTests;
 			sourceTree = "<group>";
@@ -155,6 +160,7 @@
 			isa = PBXGroup;
 			children = (
 				16B2BAD828691073002888C0 /* Restaurant.swift */,
+				162D1464286E222D003CAD39 /* LocalStorage.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -345,6 +351,7 @@
 				16B2BAEB286A4D22002888C0 /* RestaurantsListViewModel.swift in Sources */,
 				16B2BAA6286908D2002888C0 /* AppDelegate.swift in Sources */,
 				16E3EAE6286BA25900C1A1CE /* SortOptionsViewModel.swift in Sources */,
+				162D1465286E222D003CAD39 /* LocalStorage.swift in Sources */,
 				16B2BAF0286A5B18002888C0 /* RestaurantsViewController.swift in Sources */,
 				16B2BAA8286908D2002888C0 /* SceneDelegate.swift in Sources */,
 			);
@@ -355,6 +362,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				16E3EAE4286B9C6C00C1A1CE /* SortOptionsViewModelTests.swift in Sources */,
+				162D1463286E1610003CAD39 /* LocalStorageTests.swift in Sources */,
 				16B2BABD286908D6002888C0 /* RestaurantsTests.swift in Sources */,
 				16B2BAE7286A38CD002888C0 /* RestaurantsListViewModelTests.swift in Sources */,
 			);
