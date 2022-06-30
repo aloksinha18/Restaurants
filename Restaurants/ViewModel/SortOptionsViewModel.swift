@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum FilterType: CaseIterable {
+enum FilterType: Int, CaseIterable {
     case bestMatch
     case newest
     case ratingAverage
