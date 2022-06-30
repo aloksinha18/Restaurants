@@ -8,23 +8,6 @@
 import XCTest
 @testable import Restaurants
 
-class MockRestaurantsLoader: RestaurantLoader {
-    
-    private var completion: ((Result<[Restaurant], Error>) -> Void)?
-    
-    func load(completion: @escaping (Result<[Restaurant], Error>) -> Void) {
-        self.completion = completion
-    }
-    
-    func complete(with restaurant: [Restaurant]) {
-        completion?(.success(restaurant))
-    }
-    
-    func complete(with error: Error) {
-        completion?(.failure(error))
-    }
-}
-
 final class RestaurantsListViewModelTests: XCTestCase {
     
     let loader = MockRestaurantsLoader()
@@ -212,5 +195,23 @@ final class RestaurantsListViewModelTests: XCTestCase {
     
     private func anyNSError() -> NSError {
         NSError(domain: "Test", code: 404)
+    }
+}
+
+
+private final class MockRestaurantsLoader: RestaurantLoader {
+    
+    private var completion: ((Result<[Restaurant], Error>) -> Void)?
+    
+    func load(completion: @escaping (Result<[Restaurant], Error>) -> Void) {
+        self.completion = completion
+    }
+    
+    func complete(with restaurant: [Restaurant]) {
+        completion?(.success(restaurant))
+    }
+    
+    func complete(with error: Error) {
+        completion?(.failure(error))
     }
 }
