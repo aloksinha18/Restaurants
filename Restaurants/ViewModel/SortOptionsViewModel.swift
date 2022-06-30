@@ -16,7 +16,9 @@ enum FilterType: CaseIterable {
     case averageProductPrice
     case deliveryCosts
     case minCost
+}
 
+extension FilterType {
     func predicate() -> ((Restaurant, Restaurant) -> Bool) {
         switch self {
         case .bestMatch:
@@ -60,6 +62,6 @@ enum FilterType: CaseIterable {
     }
 }
 
-struct SortListViewModel {
+struct SortOptionsViewModel {
     var filters = FilterType.allCases
 }

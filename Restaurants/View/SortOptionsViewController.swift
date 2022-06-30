@@ -7,11 +7,13 @@
 
 import UIKit
 
-final class SortListViewController: UITableViewController {
+final class SortOptionsViewController: UITableViewController {
     
-    let viewModel: SortListViewModel
+    let viewModel: SortOptionsViewModel
     
-    init(viewModel: SortListViewModel) {
+    var selectFilter:((FilterType)-> Void)?
+    
+    init(viewModel: SortOptionsViewModel) {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
     }
@@ -23,12 +25,11 @@ final class SortListViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.register(RestaurantTableViewCell.self, forCellReuseIdentifier: "Cell")
-
     }
 
     // MARK: - Table view data source
 
-    override func numberOfSections(in tableView: UITableView) -> Int {
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of sections
         return viewModel.filters.count
     }
@@ -38,5 +39,9 @@ final class SortListViewController: UITableViewController {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
         cell.textLabel?.text = viewModel.filters[indexPath.row].description
         return cell
+    }
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        selectFilter?(viewModel.filters[indexPath.row])
     }
 }
