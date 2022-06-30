@@ -9,40 +9,46 @@ import XCTest
 @testable import Restaurants
 
 class MockRestaurantsLoader: RestaurantLoader {
-    private let result: Result<[Restaurant], Error>
     
-    init(result: Result<[Restaurant], Error>) {
-        self.result = result
+    private var completion: ((Result<[Restaurant], Error>) -> Void)?
+    
+    func load(completion: @escaping (Result<[Restaurant], Error>) -> Void) {
+        self.completion = completion
     }
-        
-    func load(completion: (Result<[Restaurant], Error>) -> Void) {
-        completion(result)
+    
+    func complete(with restaurant: [Restaurant]) {
+        completion?(.success(restaurant))
+    }
+    
+    func complete(with error: Error) {
+        completion?(.failure(error))
     }
 }
 
 final class RestaurantsListViewModelTests: XCTestCase {
     
-    func test_load_in_sorted_order() {
-        let firstRestaurant = getRestaurant(with: "First Restaurant", status: .closed)
-        let secondRestaurant = getRestaurant(with: "Second Restaurant", status: .statusOpen)
-        let thirdRestaurant = getRestaurant(with: "Third Restaurant", status: .orderAhead)
-        let loader = MockRestaurantsLoader(result: .success([firstRestaurant, secondRestaurant, thirdRestaurant]))
-        let sut = RestaurantsListViewModel(loader: loader)
-        sut.load()
-        sut.onLoad = { result in
-            XCTAssertEqual(result[0].status, .statusOpen)
-            XCTAssertEqual(result[1].status, .orderAhead)
-            XCTAssertEqual(result[2].status, .closed)
-        }
+    let loader = MockRestaurantsLoader()
+    var sut: RestaurantsListViewModel!
+    
+    
+    func test_load_in_sorted_status_order() {
+        let firstRestaurant = getRestaurant(status: .closed)
+        let secondRestaurant = getRestaurant(status: .statusOpen)
+        let thirdRestaurant = getRestaurant(status: .orderAhead)
+        test(restaurants: [firstRestaurant, secondRestaurant, thirdRestaurant], expectedOutput: [secondRestaurant, thirdRestaurant, firstRestaurant])
     }
     
     func test_load_fails() {
-        let loader = MockRestaurantsLoader(result: .failure(anyNSError()))
+        let loader = MockRestaurantsLoader()
         let sut = RestaurantsListViewModel(loader: loader)
         sut.load()
+        let expectation = expectation(description: "wait for restaurant to load")
         sut.onFail = { error in
             XCTAssertNotNil(error)
+            expectation.fulfill()
         }
+        loader.complete(with: anyNSError())
+        wait(for: [expectation], timeout: 1.0)
     }
     
     func test_load_in_sorted_order_after_search() {
@@ -51,42 +57,85 @@ final class RestaurantsListViewModelTests: XCTestCase {
         let firstOrderaheadRestaurant = getRestaurant(with: "First Restaurant", status: .statusOpen)
         let secondRestaurant = getRestaurant(with: "Second Restaurant", status: .statusOpen)
         let thirdRestaurant = getRestaurant(with: "Third Restaurant", status: .orderAhead)
-        
-        let sut = RestaurantsListViewModel(loader: MockRestaurantsLoader(result: .success([firstClosedRestaurant,firstOpenRestaurant,firstOrderaheadRestaurant, secondRestaurant, thirdRestaurant])))
+        let restaurants = [firstClosedRestaurant,firstOpenRestaurant,firstOrderaheadRestaurant, secondRestaurant, thirdRestaurant]
+        test("First", nil, restaurants: restaurants, expectedOutput: [firstOrderaheadRestaurant, firstOpenRestaurant, firstClosedRestaurant])
+    }
 
-        sut.sortedRestaurantsByName("First")
-        
-        sut.onLoad = { result in
-            XCTAssertEqual(result.count, 3)
-            XCTAssertEqual(result[0].status, .statusOpen)
-            XCTAssertEqual(result[1].status, .orderAhead)
-            XCTAssertEqual(result[2].status, .closed)
+    func test_load_in_sorted_order_after_applying_sortingOption_bestMatch() {
+        let firstClosedRestaurant = getRestaurant( status: .closed, bestMatch: 23)
+        let firstOrderaheadRestaurant = getRestaurant(status: .orderAhead, bestMatch: 46)
+        let firstOpenRestaurant = getRestaurant(status: .statusOpen, bestMatch: 56)
+        let secondRestaurant = getRestaurant(status: .statusOpen, bestMatch: 65)
+        let thirdRestaurant = getRestaurant(status: .orderAhead, bestMatch: 76)
+        let fourthRestaurant = getRestaurant(status: .statusOpen, bestMatch: 96)
+
+        let restaurants = [firstClosedRestaurant,firstOpenRestaurant,firstOrderaheadRestaurant, secondRestaurant, thirdRestaurant, fourthRestaurant]
+        let expectedOutput = [fourthRestaurant, secondRestaurant, firstOpenRestaurant, thirdRestaurant, firstOrderaheadRestaurant, firstClosedRestaurant]
+        test(nil, .bestMatch, restaurants: restaurants, expectedOutput: expectedOutput)
+    }
+
+    private func test(_ searchText: String? = nil, _ sortOptions: FilterType? = nil, restaurants: [Restaurant], expectedOutput: [Restaurant]) {
+        let expectation = expectation(description: "wait for restaurant to load")
+        let loader = MockRestaurantsLoader()
+        let sut = RestaurantsListViewModel(loader: loader)
+        sut.load()
+        if let option = sortOptions {
+            sut.onLoad = {
+                sut.sortedResultsBySortOption(option)
+                expectation.fulfill()
+            }
+        } else if let text = searchText {
+            sut.onLoad = {
+                sut.sortedRestaurantsByNameAndNotify(text)
+                expectation.fulfill()
+            }
+        } else {
+            expectation.fulfill()
         }
+        
+        loader.complete(with: restaurants)
+        XCTAssertEqual(sut.filteredList, expectedOutput)
+        wait(for: [expectation], timeout: 1.0)
+    }
+    
+    func test_load_in_sorted_order_after_applying_sortingOption_newest() {
+        let firstClosedRestaurant = getRestaurant(status: .closed, newest: 23)
+        let firstOrderaheadRestaurant = getRestaurant(status: .orderAhead, newest: 46)
+        let firstOpenRestaurant = getRestaurant(status: .statusOpen, newest: 56)
+        let secondRestaurant = getRestaurant(status: .statusOpen, newest: 65)
+        let thirdRestaurant = getRestaurant(status: .orderAhead, newest: 76)
+        let fourthRestaurant = getRestaurant(status: .statusOpen, newest: 96)
+
+        let restaurants = [firstClosedRestaurant,firstOpenRestaurant,firstOrderaheadRestaurant, secondRestaurant, thirdRestaurant, fourthRestaurant]
+        test(nil, .newest, restaurants: restaurants, expectedOutput: [fourthRestaurant, secondRestaurant, firstOpenRestaurant, thirdRestaurant, firstOrderaheadRestaurant, firstClosedRestaurant])
     }
     
     func test_resetting_restaurants_after_removing_search() {
-        let firstClosedRestaurant = getRestaurant(with: "First Restaurant", status: .closed)
-        let firstOpenRestaurant = getRestaurant(with: "First Restaurant", status: .orderAhead)
-        let firstOrderaheadRestaurant = getRestaurant(with: "First Restaurant", status: .statusOpen)
-        let secondRestaurant = getRestaurant(with: "Second Restaurant", status: .statusOpen)
-        let thirdRestaurant = getRestaurant(with: "Third Restaurant", status: .orderAhead)
+        let firstClosedRestaurant = getRestaurant(status: .closed)
+        let firstOpenRestaurant = getRestaurant(status: .orderAhead)
+        let firstOrderaheadRestaurant = getRestaurant(status: .statusOpen)
+        let secondRestaurant = getRestaurant(status: .statusOpen)
+        let thirdRestaurant = getRestaurant(status: .orderAhead)
+        let loader = MockRestaurantsLoader()
+        let sut = RestaurantsListViewModel(loader: loader)
+        let expectation = expectation(description: "wait for restaurant to load")
         
-        let sut = RestaurantsListViewModel(loader: MockRestaurantsLoader(result: .success([firstClosedRestaurant,firstOpenRestaurant,firstOrderaheadRestaurant, secondRestaurant, thirdRestaurant])))
-
-        sut.sortedRestaurantsByName("First")
-        sut.removeSearch()
-        sut.onLoad = { result in
-            XCTAssertEqual(result.count, 5)
-            XCTAssertEqual(result[0].status, .statusOpen)
-            XCTAssertEqual(result[1].status, .statusOpen)
-            XCTAssertEqual(result[2].status, .orderAhead)
-            XCTAssertEqual(result[3].status, .orderAhead)
-            XCTAssertEqual(result[4].status, .closed)
+        sut.load()
+        
+        sut.onLoad = {
+            sut.sortedRestaurantsByNameAndNotify("first")
+            sut.removeSearchAndNotify()
+            XCTAssertEqual(sut.filteredList, [firstOrderaheadRestaurant,secondRestaurant,firstOpenRestaurant, thirdRestaurant, firstClosedRestaurant])
+            expectation.fulfill()
         }
+                
+        loader.complete(with: [firstClosedRestaurant,firstOpenRestaurant,firstOrderaheadRestaurant, secondRestaurant, thirdRestaurant])
+        
+        wait(for: [expectation], timeout: 1.0)
     }
     
-    private func getRestaurant(with name: String, status: Status)-> Restaurant {
-        Restaurant(name: name, status: status, sortingValues: SortingValues(bestMatch: 0.0, newest: 96.0, ratingAverage: 4.5, distance: 1190, popularity: 17, averageProductPrice: 1536, deliveryCosts: 200, minCost: 1000))
+    private func getRestaurant(with name: String = "Restaurant", status: Status, bestMatch: Float = 0.0, newest: Float = 96.0 , ratingAverage: Float = 4.5, distance: Float = 1190, popularity: Float = 17, averageProductPrice: Float = 1536, deliveryCosts: Float = 200, minCost: Float = 1000)-> Restaurant {
+        Restaurant(name: name, status: status, sortingValues: SortingValues(bestMatch: bestMatch, newest: newest, ratingAverage: ratingAverage, distance: distance, popularity: popularity, averageProductPrice: averageProductPrice, deliveryCosts: deliveryCosts, minCost: minCost))
     }
     
     private func anyNSError() -> NSError {

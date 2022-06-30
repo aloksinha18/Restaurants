@@ -10,12 +10,16 @@ import Foundation
 class RestaurantsListViewModel {
     
     private let loader: RestaurantLoader
-    var restaurants: [Restaurant] = []
-    var filteredList: [Restaurant] = []
-
+    private var searchInput: String?
+    private var restaurants: [Restaurant] = []
     
-    var onLoad: (([Restaurant])-> Void)?
+    var filteredList: [Restaurant] = []
+    
+    var onLoad: (()-> Void)?
+    var onUpdate: (()-> Void)?
     var onFail: ((Error)-> Void)?
+    
+    var sortOption: FilterType?
     
     init(loader: RestaurantLoader) {
         self.loader = loader
@@ -29,28 +33,45 @@ class RestaurantsListViewModel {
                 let sortedList = self.sortRestaurantsByStatus(restaurants)
                 self.restaurants = sortedList
                 self.filteredList = sortedList
-                self.onLoad?(sortedList)
+                self.onLoad?()
             case .failure(let error):
                 self.onFail?(error)
             }
         }
     }
     
-    private func sortRestaurantsByStatus(_ restaurants: [Restaurant]) -> [Restaurant] {
-        let restaurants = restaurants.sorted(by: { $0.status > $1.status })
+    private func sortRestaurantsByStatus(_ input: [Restaurant]) -> [Restaurant] {
+        let restaurants = input.sorted(by: { $0.status > $1.status })
         return restaurants
     }
     
-    func sortedRestaurantsByName(_ input: String)  {
+    func sortedRestaurantsByNameAndNotify(_ input: String)  {
+        searchInput = input
         let result = restaurants.filter { $0.name.hasPrefix(input) }
         self.filteredList = result
-        onLoad?(result)
+        onUpdate?()
     }
     
-    func removeSearch() {
-        let result = restaurants.sorted(by: { $0.status > $1.status })
-        self.restaurants = result
-        self.filteredList = result
-        onLoad?(result)
+    func sortedResultsBySortOption(_ input: FilterType) {
+        sortOption = input
+        let result = restaurants.sorted(by: input.predicate())
+        if let searchInput = searchInput {
+            let searchedResults  = result.filter { $0.name.hasPrefix(searchInput) }
+            sortByStatusAndNotify(input: searchedResults)
+        } else {
+            sortByStatusAndNotify(input: result)
+        }
+    }
+    
+    private func sortByStatusAndNotify(input: [Restaurant]) {
+        let finalResult = sortRestaurantsByStatus(input)
+        self.filteredList = finalResult
+        onUpdate?()
+    }
+    
+    func removeSearchAndNotify() {
+        self.filteredList = restaurants
+        self.searchInput = nil
+        onUpdate?()
     }
 }
