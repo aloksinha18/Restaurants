@@ -24,17 +24,25 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         let viewModel = RestaurantsListViewModel(loader: loader)
         let controller = RestaurantsViewController(viewModel: viewModel)
         let navigationController = UINavigationController(rootViewController: controller)
+        let sortingOptionsViewController = SortOptionsViewController(viewModel: SortOptionsViewModel())
+
         controller.didStartSearch = { text in
-            viewModel.sortedRestaurantsByName(text)
+            viewModel.sortedRestaurantsByNameAndNotify(text)
         }
         
         controller.didCancelSearch = {
-            viewModel.removeSearch()
+            viewModel.removeSearchAndNotify ()
         }
         
         controller.didTapFilter = {
-            
+            navigationController.pushViewController(sortingOptionsViewController, animated: true)
         }
+        
+        sortingOptionsViewController.selectFilter = { sortOption in
+            viewModel.sortedResultsBySortOption(sortOption)
+            navigationController.popToRootViewController(animated: true)
+        }
+        
         window?.backgroundColor = .white
         window?.rootViewController = navigationController
         window?.makeKeyAndVisible()
