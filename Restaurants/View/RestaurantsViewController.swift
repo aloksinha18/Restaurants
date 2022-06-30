@@ -11,11 +11,12 @@ final class RestaurantsViewController: UITableViewController {
     
     private let viewModel: RestaurantsListViewModel
     private let searchController = UISearchController()
+    private let sortsOptionButton = UIButton()
 
     var didStartSearch:((String)-> Void)?
     var didCancelSearch:(()-> Void)?
     var didTapFilter:(()-> Void)?
-
+    
     init(viewModel: RestaurantsListViewModel) {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
@@ -27,15 +28,32 @@ final class RestaurantsViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupButton()
         navigationItem.searchController = searchController
-        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Sort By", style: .plain, target: self, action: #selector(tapFilters))
         searchController.searchResultsUpdater = self
         searchController.searchBar.delegate = self
         tableView.register(RestaurantTableViewCell.self, forCellReuseIdentifier: "Cell")
-        viewModel.onLoad = { [weak self] result in
-            self?.tableView.reloadData()
-        }
+        
+        viewModel.onLoad = loadTableView
+        viewModel.onUpdate = loadTableView
         viewModel.load()
+    }
+    
+    func loadTableView() {
+        tableView.reloadData()
+    }
+    
+    private func setupButton() {
+        sortsOptionButton.setTitle("Sort", for: .normal)
+        sortsOptionButton.backgroundColor = .black
+        sortsOptionButton.layer.cornerRadius = 25
+        view.addSubview(sortsOptionButton)
+        sortsOptionButton.translatesAutoresizingMaskIntoConstraints = false
+        sortsOptionButton.widthAnchor.constraint(equalToConstant: 50).isActive = true
+        sortsOptionButton.heightAnchor.constraint(equalToConstant: 50).isActive = true
+        sortsOptionButton.trailingAnchor.constraint(equalTo: self.view.layoutMarginsGuide.trailingAnchor, constant: -16).isActive = true
+        sortsOptionButton.bottomAnchor.constraint(equalTo: self.view.layoutMarginsGuide.bottomAnchor, constant: -10).isActive = true
+        sortsOptionButton.addTarget(self, action: #selector(tapFilters), for: .touchUpInside)
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -49,7 +67,7 @@ final class RestaurantsViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! RestaurantTableViewCell
-        cell.configure(viewModel.filteredList[indexPath.row])
+        cell.configure(viewModel.filteredList[indexPath.row], sortOption: viewModel.sortOption)
         return cell
     }
 }
