@@ -110,6 +110,78 @@ final class RestaurantsListViewModelTests: XCTestCase {
         test(nil, .newest, restaurants: restaurants, expectedOutput: [fourthRestaurant, secondRestaurant, firstOpenRestaurant, thirdRestaurant, firstOrderaheadRestaurant, firstClosedRestaurant])
     }
     
+    func test_load_in_sorted_order_after_applying_sortingOption_ratingAverage() {
+        let firstClosedRestaurant = getRestaurant(status: .closed, ratingAverage: 23)
+        let firstOrderaheadRestaurant = getRestaurant(status: .orderAhead, ratingAverage: 46)
+        let firstOpenRestaurant = getRestaurant(status: .statusOpen, ratingAverage: 56)
+        let secondRestaurant = getRestaurant(status: .statusOpen, ratingAverage: 65)
+        let thirdRestaurant = getRestaurant(status: .orderAhead, ratingAverage: 76)
+        let fourthRestaurant = getRestaurant(status: .statusOpen, ratingAverage: 96)
+
+        let restaurants = [firstClosedRestaurant,firstOpenRestaurant,firstOrderaheadRestaurant, secondRestaurant, thirdRestaurant, fourthRestaurant]
+        test(nil, .ratingAverage, restaurants: restaurants, expectedOutput: [fourthRestaurant, secondRestaurant, firstOpenRestaurant, thirdRestaurant, firstOrderaheadRestaurant, firstClosedRestaurant])
+    }
+    
+    func test_load_in_sorted_order_after_applying_sortingOption_distance() {
+        let firstClosedRestaurant = getRestaurant(status: .closed, distance: 23)
+        let firstOrderaheadRestaurant = getRestaurant(status: .orderAhead, distance: 46)
+        let firstOpenRestaurant = getRestaurant(status: .statusOpen, distance: 156)
+        let secondRestaurant = getRestaurant(status: .statusOpen, distance: 165)
+        let thirdRestaurant = getRestaurant(status: .orderAhead, distance: 176)
+        let fourthRestaurant = getRestaurant(status: .statusOpen, distance: 1296)
+
+        let restaurants = [firstClosedRestaurant,firstOpenRestaurant,firstOrderaheadRestaurant, secondRestaurant, thirdRestaurant, fourthRestaurant]
+        test(nil, .distance, restaurants: restaurants, expectedOutput: [firstOpenRestaurant, secondRestaurant, fourthRestaurant, firstOrderaheadRestaurant, thirdRestaurant, firstClosedRestaurant])
+    }
+    
+    func test_load_in_sorted_order_after_applying_sortingOption_popularity() {
+        let firstClosedRestaurant = getRestaurant(status: .closed, popularity: 23)
+        let firstOrderaheadRestaurant = getRestaurant(status: .orderAhead, popularity: 46)
+        let firstOpenRestaurant = getRestaurant(status: .statusOpen, popularity: 156)
+        let secondRestaurant = getRestaurant(status: .statusOpen, popularity: 165)
+        let thirdRestaurant = getRestaurant(status: .orderAhead, popularity: 176)
+        let fourthRestaurant = getRestaurant(status: .statusOpen, popularity: 1296)
+
+        let restaurants = [firstClosedRestaurant,firstOpenRestaurant,firstOrderaheadRestaurant, secondRestaurant, thirdRestaurant, fourthRestaurant]
+        test(nil, .popularity, restaurants: restaurants, expectedOutput: [fourthRestaurant, secondRestaurant, firstOpenRestaurant, thirdRestaurant, firstOrderaheadRestaurant, firstClosedRestaurant])
+    }
+    
+    func test_load_in_sorted_order_after_applying_sortingOption_averageProductPrice() {
+        let firstClosedRestaurant = getRestaurant(status: .closed, averageProductPrice: 23)
+        let firstOrderaheadRestaurant = getRestaurant(status: .orderAhead, averageProductPrice: 46)
+        let firstOpenRestaurant = getRestaurant(status: .statusOpen, averageProductPrice: 156)
+        let secondRestaurant = getRestaurant(status: .statusOpen, averageProductPrice: 165)
+        let thirdRestaurant = getRestaurant(status: .orderAhead, averageProductPrice: 176)
+        let fourthRestaurant = getRestaurant(status: .statusOpen, averageProductPrice: 1296)
+
+        let restaurants = [firstClosedRestaurant,firstOpenRestaurant,firstOrderaheadRestaurant, secondRestaurant, thirdRestaurant, fourthRestaurant]
+        test(nil, .averageProductPrice, restaurants: restaurants, expectedOutput: [firstOpenRestaurant, secondRestaurant, fourthRestaurant, firstOrderaheadRestaurant, thirdRestaurant, firstClosedRestaurant])
+    }
+    
+    func test_load_in_sorted_order_after_applying_sortingOption_deliveryCosts() {
+        let firstClosedRestaurant = getRestaurant(status: .closed, deliveryCosts: 23)
+        let firstOrderaheadRestaurant = getRestaurant(status: .orderAhead, deliveryCosts: 46)
+        let firstOpenRestaurant = getRestaurant(status: .statusOpen, deliveryCosts: 156)
+        let secondRestaurant = getRestaurant(status: .statusOpen, deliveryCosts: 165)
+        let thirdRestaurant = getRestaurant(status: .orderAhead, deliveryCosts: 176)
+        let fourthRestaurant = getRestaurant(status: .statusOpen, deliveryCosts: 1296)
+
+        let restaurants = [firstClosedRestaurant,firstOpenRestaurant,firstOrderaheadRestaurant, secondRestaurant, thirdRestaurant, fourthRestaurant]
+        test(nil, .deliveryCosts, restaurants: restaurants, expectedOutput: [firstOpenRestaurant, secondRestaurant, fourthRestaurant, firstOrderaheadRestaurant, thirdRestaurant, firstClosedRestaurant])
+    }
+    
+    func test_load_in_sorted_order_after_applying_sortingOption_minCost() {
+        let firstClosedRestaurant = getRestaurant(status: .closed, minCost: 23)
+        let firstOrderaheadRestaurant = getRestaurant(status: .orderAhead, minCost: 46)
+        let firstOpenRestaurant = getRestaurant(status: .statusOpen, minCost: 156)
+        let secondRestaurant = getRestaurant(status: .statusOpen, minCost: 165)
+        let thirdRestaurant = getRestaurant(status: .orderAhead, minCost: 176)
+        let fourthRestaurant = getRestaurant(status: .statusOpen, minCost: 1296)
+
+        let restaurants = [firstClosedRestaurant,firstOpenRestaurant,firstOrderaheadRestaurant, secondRestaurant, thirdRestaurant, fourthRestaurant]
+        test(nil, .minCost, restaurants: restaurants, expectedOutput: [firstOpenRestaurant, secondRestaurant, fourthRestaurant, firstOrderaheadRestaurant, thirdRestaurant, firstClosedRestaurant])
+    }
+    
     func test_resetting_restaurants_after_removing_search() {
         let firstClosedRestaurant = getRestaurant(status: .closed)
         let firstOpenRestaurant = getRestaurant(status: .orderAhead)

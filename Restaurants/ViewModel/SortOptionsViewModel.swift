@@ -28,15 +28,15 @@ extension FilterType {
         case .ratingAverage:
             return { $0.sortingValues.ratingAverage > $1.sortingValues.ratingAverage }
         case .distance:
-            return { $0.sortingValues.distance > $1.sortingValues.distance }
+            return { $0.sortingValues.distance < $1.sortingValues.distance }
         case .popularity:
             return { $0.sortingValues.popularity > $1.sortingValues.popularity }
         case .averageProductPrice:
-            return { $0.sortingValues.averageProductPrice > $1.sortingValues.averageProductPrice }
+            return { $0.sortingValues.averageProductPrice < $1.sortingValues.averageProductPrice }
         case .deliveryCosts:
-            return { $0.sortingValues.deliveryCosts > $1.sortingValues.deliveryCosts }
+            return { $0.sortingValues.deliveryCosts < $1.sortingValues.deliveryCosts }
         case .minCost:
-            return { $0.sortingValues.minCost > $1.sortingValues.minCost }
+            return { $0.sortingValues.minCost < $1.sortingValues.minCost }
         }
     }
     
