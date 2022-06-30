@@ -19,7 +19,7 @@ final class RestaurantsListViewModelTests: XCTestCase {
     
     func test_load_fails() {
         let loader = MockRestaurantsLoader()
-        let sut = RestaurantsListViewModel(loader: loader, sortOptionLoader: getSortOptionLoader())
+        let sut = RestaurantsListViewModel(loader: loader, sortingOptionsManager: getSortOptionLoader())
         sut.load()
         let expectation = expectation(description: "wait for restaurant to load")
         sut.onFail = { error in
@@ -56,7 +56,7 @@ final class RestaurantsListViewModelTests: XCTestCase {
     private func test(_ searchText: String? = nil, _ sortOptions: SortingOptionType? = nil, restaurants: [Restaurant], expectedOutput: [Restaurant]) {
         let expectation = expectation(description: "wait for restaurant to load")
         let loader = MockRestaurantsLoader()
-        let sut = RestaurantsListViewModel(loader: loader, sortOptionLoader: getSortOptionLoader())
+        let sut = RestaurantsListViewModel(loader: loader, sortingOptionsManager: getSortOptionLoader())
         sut.load()
         if let option = sortOptions {
             sut.onLoad = {
@@ -174,7 +174,7 @@ final class RestaurantsListViewModelTests: XCTestCase {
         let secondRestaurant = getRestaurant(status: .statusOpen)
         let thirdRestaurant = getRestaurant(status: .orderAhead)
         let loader = MockRestaurantsLoader()
-        let sut = RestaurantsListViewModel(loader: loader, sortOptionLoader: getSortOptionLoader())
+        let sut = RestaurantsListViewModel(loader: loader, sortingOptionsManager: getSortOptionLoader())
         let expectation = expectation(description: "wait for restaurant to load")
         
         sut.load()
