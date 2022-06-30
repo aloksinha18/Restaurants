@@ -36,6 +36,8 @@ final class RestaurantsViewController: UITableViewController {
         tableView.register(RestaurantTableViewCell.self, forCellReuseIdentifier: ReuseIdentifier.cell)
         
         viewModel.onLoad = loadTableView
+        viewModel.onUpdate = loadTableView
+        
         viewModel.load()
     }
     
@@ -67,7 +69,7 @@ final class RestaurantsViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: ReuseIdentifier.cell, for: indexPath) as! RestaurantTableViewCell
-        cell.configure(viewModel.filteredList[indexPath.row], sortOption: viewModel.sortOption)
+        cell.configure(viewModel.filteredList[indexPath.row], sortOption: viewModel.selectedSortOption)
         return cell
     }
 }
