@@ -36,7 +36,6 @@ final class RestaurantsViewController: UITableViewController {
         tableView.register(RestaurantTableViewCell.self, forCellReuseIdentifier: ReuseIdentifier.cell)
         
         viewModel.onLoad = loadTableView
-        viewModel.onUpdate = loadTableView
         viewModel.load()
     }
     

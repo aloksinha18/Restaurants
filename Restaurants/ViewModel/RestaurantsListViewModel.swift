@@ -49,7 +49,7 @@ class RestaurantsListViewModel {
         searchInput = input
         let result = restaurants.filter { $0.name.hasPrefix(input) }
         self.filteredList = result
-        onUpdate?()
+        onLoad?()
     }
     
     func sortedResultsBySortOption(_ input: FilterType) {
@@ -66,12 +66,12 @@ class RestaurantsListViewModel {
     private func sortByStatusAndNotify(input: [Restaurant]) {
         let finalResult = sortRestaurantsByStatus(input)
         self.filteredList = finalResult
-        onUpdate?()
+        onLoad?()
     }
     
     func removeSearchAndNotify() {
         self.filteredList = restaurants
         self.searchInput = nil
-        onUpdate?()
+        onLoad?()
     }
 }

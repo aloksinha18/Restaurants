@@ -10,10 +10,6 @@ import XCTest
 
 final class RestaurantsListViewModelTests: XCTestCase {
     
-    let loader = MockRestaurantsLoader()
-    var sut: RestaurantsListViewModel!
-    
-    
     func test_load_in_sorted_status_order() {
         let firstRestaurant = getRestaurant(status: .closed)
         let secondRestaurant = getRestaurant(status: .statusOpen)
