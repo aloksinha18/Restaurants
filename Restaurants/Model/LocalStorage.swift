@@ -8,12 +8,12 @@
 import Foundation
 
 protocol SortOptionLoader {
-    func save(_ filter: FilterType)
+    func save(_ rawValue: Int)
     func getFilter() -> FilterType?
 }
 
 protocol LocalStoragePresentable {
-    func saveToLocal(_ filter: FilterType)
+    func saveToLocal(_ rawValue: Int)
     func retrieveFilterFromLocal() -> FilterType?
 }
 
@@ -21,13 +21,13 @@ struct UserDefaultStorage: LocalStoragePresentable {
     
     let userDefault = UserDefaults.standard
     
-    func saveToLocal(_ filter: FilterType) {
-        userDefault.set(filter, forKey: "sortOption")
+    func saveToLocal(_ rawValue: Int) {
+        userDefault.set(rawValue, forKey: "sortOption")
     }
     
     func retrieveFilterFromLocal() -> FilterType? {
-        if let value =  userDefault.value(forKey: "sortOption") as? FilterType {
-            return value
+        if let rawValue =  userDefault.value(forKey: "sortOption") as? Int, let filter = FilterType(rawValue: rawValue) {
+            return filter
         }
         return nil
     }
@@ -40,8 +40,8 @@ struct LocalStorage: SortOptionLoader {
         self.loader = loader
     }
     
-    func save(_ filter: FilterType) {
-        loader.saveToLocal(filter)
+    func save(_ rawValue: Int) {
+        loader.saveToLocal(rawValue)
     }
     
     func getFilter() -> FilterType? {
