@@ -10,7 +10,7 @@ import XCTest
 
 final class LocalRestaurantLoaderTests: XCTestCase {
     
-    func test_load_fails_on_retrival() {
+    func test_load_fails_on_error() {
         
         let store = RestaurantStoreSpy()
         let sut = LocalRestaurantLoader(store: store)
@@ -50,7 +50,7 @@ final class LocalRestaurantLoaderTests: XCTestCase {
         wait(for: [expectation], timeout: 1.0)
     }
     
-    func test_load_sucess_on_retrival() {
+    func test_load_success_on_retrival() {
         let store = RestaurantStoreSpy()
         let sut = LocalRestaurantLoader(store: store)
         

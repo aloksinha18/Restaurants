@@ -10,20 +10,20 @@ import XCTest
 
 final class LocalStorageTests: XCTestCase {
     
-    func test_retriveing_sortOption_return_nil(){
+    func test_retrieving_sortOption_return_nil(){
         let loader = MockUserStorage()
         let sut = LocalStorage(loader: loader)
         XCTAssertNil(sut.getSortingOption())
     }
     
-    func test_retriveing_sortOption_saving() {
+    func test_retrievin_sortOption_afterSaving() {
         let loader = MockUserStorage()
         let sut = LocalStorage(loader: loader)
         loader.saveToLocal(SortingOptionType.popularity.rawValue)
         XCTAssertEqual(sut.getSortingOption(), .popularity)
     }
     
-    func test_retriveing_sortOption_after_changing_sortType() {
+    func test_retrievin_sortOption_after_changing_sortType() {
         let loader = MockUserStorage()
         let sut = LocalStorage(loader: loader)
         loader.saveToLocal(SortingOptionType.popularity.rawValue)
