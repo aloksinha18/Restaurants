@@ -13,8 +13,8 @@ final class RestaurantsListViewController: UITableViewController {
     
     private var sortsOptionButton: UIButton = {
         let button = UIButton()
-        button.setTitle(ButtonTitle.text, for: .normal)
-        button.backgroundColor = .blue
+        button.setImage(UIImage(named: "filterIcon"), for: .normal)
+        button.backgroundColor = .lightGray
         button.layer.cornerRadius = Layout.cornerRadius
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
