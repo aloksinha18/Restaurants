@@ -21,7 +21,9 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         window?.windowScene = windowScene
         let store = LocalRestaurantStore()
         let loader = LocalRestaurantLoader(store: store)
-        let viewModel = RestaurantsListViewModel(loader: loader)
+        let userDefaultStorage = UserDefaultStorage()
+        let sortOptionsLoader = LocalStorage(loader: userDefaultStorage)
+        let viewModel = RestaurantsListViewModel(loader: loader, sortOptionLoader: sortOptionsLoader)
         let controller = RestaurantsViewController(viewModel: viewModel)
         let navigationController = UINavigationController(rootViewController: controller)
         let sortingOptionsViewController = SortOptionsViewController(viewModel: SortOptionsViewModel())
