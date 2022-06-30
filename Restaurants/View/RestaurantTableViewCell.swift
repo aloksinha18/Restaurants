@@ -17,8 +17,12 @@ final class RestaurantTableViewCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func configure(_ restaurant: Restaurant) {
+    func configure(_ restaurant: Restaurant, sortOption: FilterType?) {
         self.textLabel?.text = restaurant.name
-        self.detailTextLabel?.text = restaurant.status.rawValue
+        guard let sortOption = sortOption else {
+            self.detailTextLabel?.text = restaurant.status.rawValue.uppercased()
+            return
+        }
+        self.detailTextLabel?.text = "\(restaurant.status.rawValue.uppercased()) ,  \(sortOption.description) : \(restaurant.value(sortOption))"
     }
 }
