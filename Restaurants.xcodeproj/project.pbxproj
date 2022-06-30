@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		162A1FA0286E4B0800133B77 /* Composer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 162A1F9F286E4B0800133B77 /* Composer.swift */; };
 		162D1463286E1610003CAD39 /* LocalStorageTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 162D1462286E1610003CAD39 /* LocalStorageTests.swift */; };
 		162D1465286E222D003CAD39 /* LocalStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 162D1464286E222D003CAD39 /* LocalStorage.swift */; };
 		16B2BAA6286908D2002888C0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16B2BAA5286908D2002888C0 /* AppDelegate.swift */; };
@@ -48,6 +49,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		162A1F9F286E4B0800133B77 /* Composer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Composer.swift; sourceTree = "<group>"; };
 		162D1462286E1610003CAD39 /* LocalStorageTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalStorageTests.swift; sourceTree = "<group>"; };
 		162D1464286E222D003CAD39 /* LocalStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalStorage.swift; sourceTree = "<group>"; };
 		16B2BAA2286908D2002888C0 /* Restaurants.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Restaurants.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -100,6 +102,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		162A1F9E286E4AF600133B77 /* Composer */ = {
+			isa = PBXGroup;
+			children = (
+				162A1F9F286E4B0800133B77 /* Composer.swift */,
+			);
+			path = Composer;
+			sourceTree = "<group>";
+		};
 		16B2BA99286908D2002888C0 = {
 			isa = PBXGroup;
 			children = (
@@ -123,6 +133,7 @@
 		16B2BAA4286908D2002888C0 /* Restaurants */ = {
 			isa = PBXGroup;
 			children = (
+				162A1F9E286E4AF600133B77 /* Composer */,
 				16B2BAF1286A625E002888C0 /* Resource */,
 				16B2BAD72869104E002888C0 /* Model */,
 				16B2BAEC286A5AEC002888C0 /* View */,
@@ -347,6 +358,7 @@
 				16E3EAE8286BA2E100C1A1CE /* SortOptionsViewController.swift in Sources */,
 				16B2BAD928691073002888C0 /* Restaurant.swift in Sources */,
 				16B2BAE52869EB00002888C0 /* LocalRestaurantStore.swift in Sources */,
+				162A1FA0286E4B0800133B77 /* Composer.swift in Sources */,
 				16B2BAE32869E379002888C0 /* LocalRestaurantsLoader.swift in Sources */,
 				16B2BAEB286A4D22002888C0 /* RestaurantsListViewModel.swift in Sources */,
 				16B2BAA6286908D2002888C0 /* AppDelegate.swift in Sources */,
