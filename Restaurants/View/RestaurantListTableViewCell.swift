@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class RestaurantTableViewCell: UITableViewCell {
+final class RestaurantListTableViewCell: UITableViewCell {
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: .subtitle, reuseIdentifier: reuseIdentifier)
@@ -17,7 +17,7 @@ final class RestaurantTableViewCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func configure(_ restaurant: Restaurant, sortOption: FilterType?) {
+    func configure(_ restaurant: Restaurant, sortOption: SortingOptionType?) {
         self.textLabel?.text = restaurant.name
         guard let sortOption = sortOption else {
             self.detailTextLabel?.text = restaurant.status.rawValue.uppercased()

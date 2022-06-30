@@ -7,13 +7,13 @@
 
 import UIKit
 
-final class SortOptionsViewController: UITableViewController {
+final class SortingOptionsListViewController: UITableViewController {
     
-    let viewModel: SortOptionsViewModel
+    let viewModel: SortingOptionsListViewModel
     
-    var selectFilter:((FilterType)-> Void)?
+    var selectSortingOption:((SortingOptionType)-> Void)?
     
-    init(viewModel: SortOptionsViewModel) {
+    init(viewModel: SortingOptionsListViewModel) {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
     }
@@ -24,24 +24,31 @@ final class SortOptionsViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        tableView.register(RestaurantTableViewCell.self, forCellReuseIdentifier: "Cell")
+        tableView.register(RestaurantListTableViewCell.self, forCellReuseIdentifier: ReuseIdentifier.cell)
     }
 
     // MARK: - Table view data source
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of sections
-        return viewModel.filters.count
+        return viewModel.sortingOptions.count
     }
 
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
-        cell.textLabel?.text = viewModel.filters[indexPath.row].description
+        let cell = tableView.dequeueReusableCell(withIdentifier: ReuseIdentifier.cell, for: indexPath)
+        cell.textLabel?.text = viewModel.sortingOptions[indexPath.row].description
         return cell
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        selectFilter?(viewModel.filters[indexPath.row])
+        selectSortingOption?(viewModel.sortingOptions[indexPath.row])
+    }
+}
+
+
+private extension SortingOptionsListViewController {
+    enum ReuseIdentifier {
+        static let cell = "RestaurantTableViewCell"
     }
 }

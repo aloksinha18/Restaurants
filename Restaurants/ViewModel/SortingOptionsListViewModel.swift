@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum FilterType: Int, CaseIterable {
+enum SortingOptionType: Int, CaseIterable {
     case bestMatch
     case newest
     case ratingAverage
@@ -18,7 +18,7 @@ enum FilterType: Int, CaseIterable {
     case minCost
 }
 
-extension FilterType {
+extension SortingOptionType {
     func predicate() -> ((Restaurant, Restaurant) -> Bool) {
         switch self {
         case .bestMatch:
@@ -62,6 +62,6 @@ extension FilterType {
     }
 }
 
-struct SortOptionsViewModel {
-    var filters = FilterType.allCases
+struct SortingOptionsListViewModel {
+    var sortingOptions = SortingOptionType.allCases
 }

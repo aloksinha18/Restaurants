@@ -13,22 +13,22 @@ final class LocalStorageTests: XCTestCase {
     func test_retriveing_sortOption_return_nil(){
         let loader = MockUserStorage()
         let sut = LocalStorage(loader: loader)
-        XCTAssertNil(sut.getFilter())
+        XCTAssertNil(sut.getSortingOption())
     }
     
     func test_retriveing_sortOption_saving() {
         let loader = MockUserStorage()
         let sut = LocalStorage(loader: loader)
-        loader.saveToLocal(FilterType.popularity.rawValue)
-        XCTAssertEqual(sut.getFilter(), .popularity)
+        loader.saveToLocal(SortingOptionType.popularity.rawValue)
+        XCTAssertEqual(sut.getSortingOption(), .popularity)
     }
     
     func test_retriveing_sortOption_after_changing_sortType() {
         let loader = MockUserStorage()
         let sut = LocalStorage(loader: loader)
-        loader.saveToLocal(FilterType.popularity.rawValue)
-        loader.saveToLocal(FilterType.distance.rawValue)
-        XCTAssertEqual(sut.getFilter(), .distance)
+        loader.saveToLocal(SortingOptionType.popularity.rawValue)
+        loader.saveToLocal(SortingOptionType.distance.rawValue)
+        XCTAssertEqual(sut.getSortingOption(), .distance)
     }
 }
 
@@ -40,10 +40,10 @@ final class MockUserStorage: LocalStoragePresentable {
         self.filterType = rawValue
     }
     
-    func retrieveFilterFromLocal() -> FilterType? {
+    func retrieveSortingOptionFromLocal() -> SortingOptionType? {
         guard let rawValue = filterType else {
             return nil
         }
-        return FilterType(rawValue: rawValue)
+        return SortingOptionType(rawValue: rawValue)
     }
 }

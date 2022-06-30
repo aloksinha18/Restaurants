@@ -7,15 +7,24 @@
 
 import UIKit
 
-final class RestaurantsViewController: UITableViewController {
+final class RestaurantsListViewController: UITableViewController {
+    
+    private let searchController = UISearchController()
+    
+    private var sortsOptionButton: UIButton = {
+        let button = UIButton()
+        button.setTitle(ButtonTitle.text, for: .normal)
+        button.backgroundColor = .blue
+        button.layer.cornerRadius = Layout.cornerRadius
+        button.translatesAutoresizingMaskIntoConstraints = false
+        return button
+    }()
     
     private let viewModel: RestaurantsListViewModel
-    private let searchController = UISearchController()
-    private let sortsOptionButton = UIButton()
 
     var didStartSearch:((String)-> Void)?
     var didCancelSearch:(()-> Void)?
-    var didTapFilter:(()-> Void)?
+    var didTapSortOptions:(()-> Void)?
     
     init(viewModel: RestaurantsListViewModel) {
         self.viewModel = viewModel
@@ -26,19 +35,31 @@ final class RestaurantsViewController: UITableViewController {
         fatalError("init(coder:) has not been implemented")
     }
     
+   
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupButton()
+        setupSearchController()
+        registerTableView()
+        bind()
+        viewModel.load()
+    }
+    
+    private func setupSearchController() {
         navigationItem.searchController = searchController
         searchController.searchResultsUpdater = self
         searchController.searchBar.delegate = self
-        
-        tableView.register(RestaurantTableViewCell.self, forCellReuseIdentifier: ReuseIdentifier.cell)
-        
+    }
+    
+    private func bind() {
         viewModel.onLoad = loadTableView
         viewModel.onUpdate = loadTableView
-        
-        viewModel.load()
+    }
+    
+    func registerTableView() {
+        tableView.register(RestaurantListTableViewCell.self, forCellReuseIdentifier: ReuseIdentifier.cell)
+
     }
     
     func loadTableView() {
@@ -46,11 +67,7 @@ final class RestaurantsViewController: UITableViewController {
     }
     
     private func setupButton() {
-        sortsOptionButton.setTitle(ButtonTitle.text, for: .normal)
-        sortsOptionButton.backgroundColor = .blue
-        sortsOptionButton.layer.cornerRadius = Layout.cornerRadius
         view.addSubview(sortsOptionButton)
-        sortsOptionButton.translatesAutoresizingMaskIntoConstraints = false
         sortsOptionButton.widthAnchor.constraint(equalToConstant: Layout.width).isActive = true
         sortsOptionButton.heightAnchor.constraint(equalToConstant: Layout.height).isActive = true
         sortsOptionButton.trailingAnchor.constraint(equalTo: self.view.layoutMarginsGuide.trailingAnchor, constant: Layout.trailing).isActive = true
@@ -60,7 +77,7 @@ final class RestaurantsViewController: UITableViewController {
     
     @objc
     func tapFilters() {
-        didTapFilter?()
+        didTapSortOptions?()
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -68,14 +85,14 @@ final class RestaurantsViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: ReuseIdentifier.cell, for: indexPath) as! RestaurantTableViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: ReuseIdentifier.cell, for: indexPath) as! RestaurantListTableViewCell
         cell.configure(viewModel.filteredList[indexPath.row], sortOption: viewModel.selectedSortOption)
         return cell
     }
 }
 
 
-extension RestaurantsViewController: UISearchResultsUpdating, UISearchBarDelegate {
+extension RestaurantsListViewController: UISearchResultsUpdating, UISearchBarDelegate {
     func updateSearchResults(for searchController: UISearchController) {
         guard let text = searchController.searchBar.text, !text.isEmpty else {
             return
@@ -96,7 +113,7 @@ extension RestaurantsViewController: UISearchResultsUpdating, UISearchBarDelegat
 }
 
 
-private extension RestaurantsViewController {
+private extension RestaurantsListViewController {
     
     enum ReuseIdentifier {
         static let cell = "RestaurantTableViewCell"

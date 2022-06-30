@@ -10,7 +10,7 @@ import XCTest
 
 final class SortOptionsViewModelTests: XCTestCase {
     func test_All_filter_items() {
-        let sut = SortOptionsViewModel()
-        XCTAssertEqual(sut.filters, [.bestMatch, .newest, .ratingAverage, .distance, .popularity, .averageProductPrice, .deliveryCosts, .minCost])
+        let sut = SortingOptionsListViewModel()
+        XCTAssertEqual(sut.sortingOptions, [.bestMatch, .newest, .ratingAverage, .distance, .popularity, .averageProductPrice, .deliveryCosts, .minCost])
     }
 }

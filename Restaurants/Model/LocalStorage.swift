@@ -7,14 +7,14 @@
 
 import Foundation
 
-protocol SortOptionLoader {
+protocol SortingOptionsManager {
     func save(_ rawValue: Int)
-    func getFilter() -> FilterType?
+    func getSortingOption() -> SortingOptionType?
 }
 
 protocol LocalStoragePresentable {
     func saveToLocal(_ rawValue: Int)
-    func retrieveFilterFromLocal() -> FilterType?
+    func retrieveSortingOptionFromLocal() -> SortingOptionType?
 }
 
 struct UserDefaultStorage: LocalStoragePresentable {
@@ -25,15 +25,15 @@ struct UserDefaultStorage: LocalStoragePresentable {
         userDefault.set(rawValue, forKey: "sortOption")
     }
     
-    func retrieveFilterFromLocal() -> FilterType? {
-        if let rawValue =  userDefault.value(forKey: "sortOption") as? Int, let filter = FilterType(rawValue: rawValue) {
+    func retrieveSortingOptionFromLocal() -> SortingOptionType? {
+        if let rawValue =  userDefault.value(forKey: "sortOption") as? Int, let filter = SortingOptionType(rawValue: rawValue) {
             return filter
         }
         return nil
     }
 }
 
-struct LocalStorage: SortOptionLoader {
+struct LocalStorage: SortingOptionsManager {
     private let loader: LocalStoragePresentable
     
     init(loader: LocalStoragePresentable) {
@@ -44,7 +44,7 @@ struct LocalStorage: SortOptionLoader {
         loader.saveToLocal(rawValue)
     }
     
-    func getFilter() -> FilterType? {
-        loader.retrieveFilterFromLocal()
+    func getSortingOption() -> SortingOptionType? {
+        loader.retrieveSortingOptionFromLocal()
     }
 }

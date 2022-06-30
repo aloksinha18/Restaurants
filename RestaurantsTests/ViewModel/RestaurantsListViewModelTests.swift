@@ -53,7 +53,7 @@ final class RestaurantsListViewModelTests: XCTestCase {
         test(nil, .bestMatch, restaurants: restaurants, expectedOutput: expectedOutput)
     }
 
-    private func test(_ searchText: String? = nil, _ sortOptions: FilterType? = nil, restaurants: [Restaurant], expectedOutput: [Restaurant]) {
+    private func test(_ searchText: String? = nil, _ sortOptions: SortingOptionType? = nil, restaurants: [Restaurant], expectedOutput: [Restaurant]) {
         let expectation = expectation(description: "wait for restaurant to load")
         let loader = MockRestaurantsLoader()
         let sut = RestaurantsListViewModel(loader: loader, sortOptionLoader: getSortOptionLoader())
@@ -210,22 +210,22 @@ final class RestaurantsListViewModelTests: XCTestCase {
         NSError(domain: "Test", code: 404)
     }
     
-    func getSortOptionLoader() -> SortOptionLoader {
+    func getSortOptionLoader() -> SortingOptionsManager {
         return MockSortOptionLoader(sortOption: .distance)
     }
 }
 
-private final class MockSortOptionLoader: SortOptionLoader {
+private final class MockSortOptionLoader: SortingOptionsManager {
     
-    private let sortOption: FilterType
+    private let sortOption: SortingOptionType
     
-    init(sortOption: FilterType) {
+    init(sortOption: SortingOptionType) {
         self.sortOption = sortOption
     }
     
     func save(_ rawValue: Int) {  }
     
-    func getFilter() -> FilterType? {
+    func getSortingOption() -> SortingOptionType? {
         return sortOption
     }
 }
