@@ -16,7 +16,7 @@ final class RestaurantsListViewController: UITableViewController {
         button.setImage(UIImage(named: "filterIcon"), for: .normal)
         button.backgroundColor = .lightGray
         button.layer.cornerRadius = Layout.cornerRadius
-        button.accessibilityIdentifier = "sortOptions"
+        button.accessibilityIdentifier = AccessibilityIdentifiers.sortOptions
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
@@ -36,10 +36,13 @@ final class RestaurantsListViewController: UITableViewController {
         fatalError("init(coder:) has not been implemented")
     }
     
-   
-    
     override func viewDidLoad() {
         super.viewDidLoad()
+        setup()
+    }
+    
+    private func setup() {
+        title = viewModel.title
         setupButton()
         setupSearchController()
         registerTableView()
@@ -48,12 +51,10 @@ final class RestaurantsListViewController: UITableViewController {
     }
     
     private func setupSearchController() {
-        searchController.searchBar.accessibilityIdentifier = "Search"
         navigationItem.searchController = searchController
         searchController.searchResultsUpdater = self
         searchController.searchBar.delegate = self
         navigationItem.hidesSearchBarWhenScrolling = false
-
     }
     
     private func bind() {
@@ -62,7 +63,7 @@ final class RestaurantsListViewController: UITableViewController {
     }
     
     func registerTableView() {
-        tableView.accessibilityIdentifier = "Table"
+        tableView.accessibilityIdentifier = AccessibilityIdentifiers.tableView
         tableView.register(RestaurantListTableViewCell.self, forCellReuseIdentifier: ReuseIdentifier.cell)
     }
     
@@ -121,10 +122,6 @@ private extension RestaurantsListViewController {
     
     enum ReuseIdentifier {
         static let cell = "RestaurantTableViewCell"
-    }
-    
-    enum ButtonTitle {
-        static let text = "Sort"
     }
     
     enum Layout {

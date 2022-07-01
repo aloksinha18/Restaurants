@@ -24,7 +24,16 @@ final class SortingOptionsListViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        tableView.accessibilityIdentifier = "Table"
+        setupView()
+    }
+    
+    private func setupView() {
+        title = viewModel.title
+        setUpTableView()
+    }
+    
+    private func setUpTableView() {
+        tableView.accessibilityIdentifier = AccessibilityIdentifiers.tableView
         tableView.register(RestaurantListTableViewCell.self, forCellReuseIdentifier: ReuseIdentifier.cell)
     }
 
