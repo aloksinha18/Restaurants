@@ -33,6 +33,7 @@
 		16F3067E286F2EDB0048FDC6 /* SortingOptionsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16F3067D286F2EDB0048FDC6 /* SortingOptionsManager.swift */; };
 		16F30680286F38770048FDC6 /* RestaurantListTableViewCellViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16F3067F286F38770048FDC6 /* RestaurantListTableViewCellViewModelTests.swift */; };
 		16F30682286F3D410048FDC6 /* RestaurantListTableViewCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16F30681286F3D410048FDC6 /* RestaurantListTableViewCellViewModel.swift */; };
+		16F30685286F3D800048FDC6 /* Extensions+ XCTestCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16F30684286F3D800048FDC6 /* Extensions+ XCTestCase.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -82,6 +83,7 @@
 		16F3067D286F2EDB0048FDC6 /* SortingOptionsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SortingOptionsManager.swift; sourceTree = "<group>"; };
 		16F3067F286F38770048FDC6 /* RestaurantListTableViewCellViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantListTableViewCellViewModelTests.swift; sourceTree = "<group>"; };
 		16F30681286F3D410048FDC6 /* RestaurantListTableViewCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantListTableViewCellViewModel.swift; sourceTree = "<group>"; };
+		16F30684286F3D800048FDC6 /* Extensions+ XCTestCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extensions+ XCTestCase.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -169,6 +171,7 @@
 		16B2BABB286908D6002888C0 /* RestaurantsTests */ = {
 			isa = PBXGroup;
 			children = (
+				16F30683286F3D660048FDC6 /* Extensions */,
 				162A1FA1286E518F00133B77 /* Model */,
 				16B2BAE8286A38D1002888C0 /* ViewModel */,
 			);
@@ -254,6 +257,14 @@
 				16F3067D286F2EDB0048FDC6 /* SortingOptionsManager.swift */,
 			);
 			path = SortingOptionsManager;
+			sourceTree = "<group>";
+		};
+		16F30683286F3D660048FDC6 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				16F30684286F3D800048FDC6 /* Extensions+ XCTestCase.swift */,
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -411,6 +422,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				16E3EAE4286B9C6C00C1A1CE /* SortOptionsViewModelTests.swift in Sources */,
+				16F30685286F3D800048FDC6 /* Extensions+ XCTestCase.swift in Sources */,
 				16F30680286F38770048FDC6 /* RestaurantListTableViewCellViewModelTests.swift in Sources */,
 				162D1463286E1610003CAD39 /* LocalStorageTests.swift in Sources */,
 				16B2BABD286908D6002888C0 /* LocalRestaurantLoaderTests.swift in Sources */,
