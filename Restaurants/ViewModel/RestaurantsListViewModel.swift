@@ -28,6 +28,10 @@ class RestaurantsListViewModel {
         self.sortingOptionsManager = sortingOptionsManager
     }
     
+    var title: String {
+        "Restaurants"
+    }
+    
     func load() {
         loader.load { [weak self] result in
             guard let self = self else { return }

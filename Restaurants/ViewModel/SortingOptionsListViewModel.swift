@@ -64,4 +64,8 @@ extension SortingOptionType {
 
 struct SortingOptionsListViewModel {
     var sortingOptions = SortingOptionType.allCases
+    
+    var title: String {
+        "Sorting Options"
+    }
 }
