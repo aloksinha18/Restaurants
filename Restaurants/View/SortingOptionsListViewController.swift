@@ -24,6 +24,7 @@ final class SortingOptionsListViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        tableView.accessibilityIdentifier = "Table"
         tableView.register(RestaurantListTableViewCell.self, forCellReuseIdentifier: ReuseIdentifier.cell)
     }
 
@@ -49,6 +50,6 @@ final class SortingOptionsListViewController: UITableViewController {
 
 private extension SortingOptionsListViewController {
     enum ReuseIdentifier {
-        static let cell = "RestaurantTableViewCell"
+        static let cell = "RestaurantListTableViewCell"
     }
 }

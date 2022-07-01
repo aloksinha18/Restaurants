@@ -16,6 +16,7 @@ final class RestaurantsListViewController: UITableViewController {
         button.setImage(UIImage(named: "filterIcon"), for: .normal)
         button.backgroundColor = .lightGray
         button.layer.cornerRadius = Layout.cornerRadius
+        button.accessibilityIdentifier = "sortOptions"
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
@@ -47,9 +48,12 @@ final class RestaurantsListViewController: UITableViewController {
     }
     
     private func setupSearchController() {
+        searchController.searchBar.accessibilityIdentifier = "Search"
         navigationItem.searchController = searchController
         searchController.searchResultsUpdater = self
         searchController.searchBar.delegate = self
+        navigationItem.hidesSearchBarWhenScrolling = false
+
     }
     
     private func bind() {
@@ -58,8 +62,8 @@ final class RestaurantsListViewController: UITableViewController {
     }
     
     func registerTableView() {
+        tableView.accessibilityIdentifier = "Table"
         tableView.register(RestaurantListTableViewCell.self, forCellReuseIdentifier: ReuseIdentifier.cell)
-
     }
     
     func loadTableView() {
