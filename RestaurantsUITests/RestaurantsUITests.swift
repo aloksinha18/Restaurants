@@ -12,16 +12,16 @@ final class RestaurantsUITests: XCTestCase {
     func test_restaurantsList_table() {
         let app = XCUIApplication()
         app.launch()
-        let table = app.tables["Table"]
+        let table = app.tables[AccessibilityIdentifiers.tableView]
         XCTAssertEqual(table.cells.count, 19)
     }
     
     func test_sortingOptions() {
         let app = XCUIApplication()
         app.launch()
-        let button = app.buttons["sortOptions"]
+        let button = app.buttons[AccessibilityIdentifiers.sortOptions]
         button.tap()
-        let table = app.tables["Table"]
+        let table = app.tables[AccessibilityIdentifiers.tableView]
         XCTAssertEqual(table.cells.count, 8)
         
         let expectedSortingOptions = ["Best match", "Newest", "Rating average", "Distance", "Popularity", "Average product price", "Delivery costs", "Minimum cost"]
@@ -36,7 +36,7 @@ final class RestaurantsUITests: XCTestCase {
     func test_result_AfterSearch() {
         let app = XCUIApplication()
         app.launch()
-        let table = app.tables["Table"]
+        let table = app.tables[AccessibilityIdentifiers.tableView]
         let searchBar = app.navigationBars.searchFields["Search"]
         searchBar.tap()
         searchBar.typeText("Roti")
@@ -49,7 +49,7 @@ final class RestaurantsUITests: XCTestCase {
     func test_result_after_cancellingSearch() {
         let app = XCUIApplication()
         app.launch()
-        let table = app.tables["Table"]
+        let table = app.tables[AccessibilityIdentifiers.tableView]
         let searchBar = app.navigationBars.searchFields["Search"]
         searchBar.tap()
         searchBar.typeText("Roti")
