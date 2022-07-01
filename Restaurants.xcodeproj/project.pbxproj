@@ -171,7 +171,6 @@
 		16B2BAC5286908D7002888C0 /* RestaurantsUITests */ = {
 			isa = PBXGroup;
 			children = (
-				16F30679286F22A90048FDC6 /* Accessibility */,
 				16B2BAC6286908D7002888C0 /* RestaurantsUITests.swift */,
 			);
 			path = RestaurantsUITests;
@@ -238,21 +237,6 @@
 				16F30677286F1EEF0048FDC6 /* AccessibilityIdentifiers.swift */,
 			);
 			path = Accessibility;
-			sourceTree = "<group>";
-		};
-		16F30679286F22A90048FDC6 /* Accessibility */ = {
-			isa = PBXGroup;
-			children = (
-				16F3067A286F22C90048FDC6 /* New Group */,
-			);
-			path = Accessibility;
-			sourceTree = "<group>";
-		};
-		16F3067A286F22C90048FDC6 /* New Group */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = "New Group";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
