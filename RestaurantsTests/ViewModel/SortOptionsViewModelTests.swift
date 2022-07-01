@@ -13,4 +13,9 @@ final class SortOptionsViewModelTests: XCTestCase {
         let sut = SortingOptionsListViewModel()
         XCTAssertEqual(sut.sortingOptions, [.bestMatch, .newest, .ratingAverage, .distance, .popularity, .averageProductPrice, .deliveryCosts, .minCost])
     }
+    
+    func test_title() {
+        let sut = SortingOptionsListViewModel()
+        XCTAssertEqual(sut.title, "Sorting Options")
+    }
 }

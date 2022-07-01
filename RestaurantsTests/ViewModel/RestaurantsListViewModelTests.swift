@@ -218,8 +218,14 @@ final class RestaurantsListViewModelTests: XCTestCase {
         NSError(domain: "Test", code: 404)
     }
     
-    func getSortOptionLoader(sortOption: SortingOptionType? = nil) -> SortingOptionsManager {
+    private func getSortOptionLoader(sortOption: SortingOptionType? = nil) -> SortingOptionsManager {
         return MockSortOptionLoader(sortOption: sortOption)
+    }
+    
+    func test_title() {
+        let loader = MockRestaurantsLoader()
+        let sut = RestaurantsListViewModel(loader: loader, sortingOptionsManager: MockSortOptionLoader())
+        XCTAssertEqual(sut.title, "Restaurants")
     }
 }
 
