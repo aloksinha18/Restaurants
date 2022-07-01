@@ -13,7 +13,7 @@ final class RestaurantsListViewController: UITableViewController {
     
     private var sortsOptionButton: UIButton = {
         let button = UIButton()
-        button.setImage(UIImage(named: "filterIcon"), for: .normal)
+        button.setImage(UIImage(named: "sortIcon"), for: .normal)
         button.backgroundColor = .lightGray
         button.layer.cornerRadius = Layout.cornerRadius
         button.accessibilityIdentifier = AccessibilityIdentifiers.sortOptions
