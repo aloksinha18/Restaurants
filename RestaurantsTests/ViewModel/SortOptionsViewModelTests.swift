@@ -9,7 +9,7 @@ import XCTest
 @testable import Restaurants
 
 final class SortOptionsViewModelTests: XCTestCase {
-    func test_sut_has_all_sortItems() {
+    func test_viewModel_has_allSortingItems() {
         let sut = SortingOptionsListViewModel()
         XCTAssertEqual(sut.sortingOptions, [.bestMatch, .newest, .ratingAverage, .distance, .popularity, .averageProductPrice, .deliveryCosts, .minCost])
     }

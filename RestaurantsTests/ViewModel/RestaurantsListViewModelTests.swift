@@ -19,7 +19,7 @@ final class RestaurantsListViewModelTests: XCTestCase {
     
     func test_load_fails_on_error() {
         let loader = MockRestaurantsLoader()
-        let sut = RestaurantsListViewModel(loader: loader, sortingOptionsManager: getSortOptionLoader())
+        let sut = RestaurantsListViewModel(loader: loader, sortingOptionsManager: getSortingOptionsManager())
         sut.load()
         let expectation = expectation(description: "wait for restaurant to load")
         sut.onFail = { error in
@@ -30,7 +30,7 @@ final class RestaurantsListViewModelTests: XCTestCase {
         wait(for: [expectation], timeout: 1.0)
     }
     
-    func test_load_in_sorted_order_after_search() {
+    func test_load_in_sortedOrder_after_search() {
         let firstRestaurant = getRestaurant(name: "First Restaurant-1", status: .closed)
         let secondRestaurant = getRestaurant(name: "First Restaurant-2", status: .orderAhead)
         let thirdRestaurant = getRestaurant(name: "First Restaurant-3", status: .statusOpen)
@@ -41,7 +41,7 @@ final class RestaurantsListViewModelTests: XCTestCase {
         test(searchText: "First", restaurants: restaurants, expectedOutput: [thirdRestaurant, secondRestaurant, firstRestaurant])
     }    
 
-    func test_load_in_sorted_order_after_applying_sortingOption_bestMatch() {
+    func test_load_in_sortedOrder_afterApplying_sortingOption_bestMatch() {
         let firstRestaurant = getRestaurant( status: .closed, bestMatch: 23)
         let secondRestaurant = getRestaurant(status: .orderAhead, bestMatch: 46)
         let thirdRestaurant = getRestaurant(status: .statusOpen, bestMatch: 56)
@@ -54,7 +54,7 @@ final class RestaurantsListViewModelTests: XCTestCase {
         test(searchText: nil, sortingOptions: .bestMatch, restaurants: restaurants, expectedOutput: expectedOutput)
     }
 
-    func test_load_in_sorted_order_after_applying_sortingOption_newest() {
+    func test_load_in_sortedOrder_afterApplying_sortingOption_newest() {
         let firstRestaurant = getRestaurant( status: .closed, newest: 23)
         let secondRestaurant = getRestaurant(status: .orderAhead, newest: 46)
         let thirdRestaurant = getRestaurant(status: .statusOpen, newest: 56)
@@ -67,7 +67,7 @@ final class RestaurantsListViewModelTests: XCTestCase {
         test(searchText: nil, sortingOptions: .newest, restaurants: restaurants, expectedOutput: expectedOutput)
     }
     
-    func test_load_in_sortedOrder_afterApplying_sortingOptionRatingAverage() {
+    func test_load_in_sortedOrder_afterApplying_sortingOption_ratingAverage() {
         let firstRestaurant = getRestaurant( status: .closed, ratingAverage: 23)
         let secondRestaurant = getRestaurant(status: .orderAhead, ratingAverage: 46)
         let thirdRestaurant = getRestaurant(status: .statusOpen, ratingAverage: 56)
@@ -80,7 +80,7 @@ final class RestaurantsListViewModelTests: XCTestCase {
         test(searchText: nil, sortingOptions: .ratingAverage, restaurants: restaurants, expectedOutput: expectedOutput)
     }
     
-    func test_load_in_sorted_order_after_applying_sortingOption_distance() {
+    func test_load_in_sortedOrder_afterApplying_sortingOption_distance() {
         let firstRestaurant = getRestaurant( status: .closed, distance: 23)
         let secondRestaurant = getRestaurant(status: .orderAhead, distance: 46)
         let thirdRestaurant = getRestaurant(status: .statusOpen, distance: 56)
@@ -93,7 +93,7 @@ final class RestaurantsListViewModelTests: XCTestCase {
         test(searchText: nil, sortingOptions: .distance, restaurants: restaurants, expectedOutput: expectedOutput)
     }
     
-    func test_load_in_sorted_order_after_applying_sortingOption_popularity() {
+    func test_load_in_sortedOrder_afterApplying_sortingOption_popularity() {
         let firstRestaurant = getRestaurant( status: .closed, popularity: 23)
         let secondRestaurant = getRestaurant(status: .orderAhead, popularity: 46)
         let thirdRestaurant = getRestaurant(status: .statusOpen, popularity: 56)
@@ -106,7 +106,7 @@ final class RestaurantsListViewModelTests: XCTestCase {
         test(searchText: nil, sortingOptions: .popularity, restaurants: restaurants, expectedOutput: expectedOutput)
     }
     
-    func test_load_in_sorted_order_after_applying_sortingOption_averageProductPrice() {
+    func test_load_in_sortedOrder_afterApplying_sortingOption_averageProductPrice() {
         let firstRestaurant = getRestaurant( status: .closed, averageProductPrice: 23)
         let secondRestaurant = getRestaurant(status: .orderAhead, averageProductPrice: 46)
         let thirdRestaurant = getRestaurant(status: .statusOpen, averageProductPrice: 56)
@@ -119,7 +119,7 @@ final class RestaurantsListViewModelTests: XCTestCase {
         test(searchText: nil, sortingOptions: .averageProductPrice, restaurants: restaurants, expectedOutput: expectedOutput)
     }
     
-    func test_load_in_sorted_order_after_applying_sortingOption_deliveryCosts() {
+    func test_load_in_sortedOrder_afterApplying_sortingOption_deliveryCosts() {
         let firstRestaurant = getRestaurant( status: .closed, deliveryCosts: 23)
         let secondRestaurant = getRestaurant(status: .orderAhead, deliveryCosts: 46)
         let thirdRestaurant = getRestaurant(status: .statusOpen, deliveryCosts: 56)
@@ -132,7 +132,7 @@ final class RestaurantsListViewModelTests: XCTestCase {
         test(searchText: nil, sortingOptions: .deliveryCosts, restaurants: restaurants, expectedOutput: expectedOutput)
     }
     
-    func test_load_in_sorted_order_after_applying_sortingOption_minCost() {
+    func test_load_in_sortedOrder_afterApplying_sortingOption_minCost() {
         let firstRestaurant = getRestaurant( status: .closed, minCost: 23)
         let secondRestaurant = getRestaurant(status: .orderAhead, minCost: 46)
         let thirdRestaurant = getRestaurant(status: .statusOpen, minCost: 56)
@@ -152,7 +152,7 @@ final class RestaurantsListViewModelTests: XCTestCase {
         let fourthRestaurant = getRestaurant(name:"Second", status: .statusOpen)
         let fifthRestaurant = getRestaurant(name:"Second", status: .orderAhead)
         let loader = MockRestaurantsLoader()
-        let sut = RestaurantsListViewModel(loader: loader, sortingOptionsManager: getSortOptionLoader())
+        let sut = RestaurantsListViewModel(loader: loader, sortingOptionsManager: getSortingOptionsManager())
         let expectation = expectation(description: "wait for restaurant to load")
         
         sut.load()
@@ -177,7 +177,7 @@ final class RestaurantsListViewModelTests: XCTestCase {
         let fifthRestaurant = getRestaurant(status: .orderAhead, distance: 176)
         let sixthRestaurant = getRestaurant(status: .statusOpen, distance: 1296)
                 
-        test(restaurants: [firstRestaurant, secondRestaurant, thirdRestaurant, fourthRestaurant, fifthRestaurant, sixthRestaurant], expectedOutput: [thirdRestaurant, fourthRestaurant, sixthRestaurant, secondRestaurant, fifthRestaurant, firstRestaurant], sortingOptionsManager: MockSortOptionLoader(sortOption: .distance))
+        test(restaurants: [firstRestaurant, secondRestaurant, thirdRestaurant, fourthRestaurant, fifthRestaurant, sixthRestaurant], expectedOutput: [thirdRestaurant, fourthRestaurant, sixthRestaurant, secondRestaurant, fifthRestaurant, firstRestaurant], sortingOptionsManager: MockSortOptionLoader(sortingOptionType: .distance))
     }
     
     private func test(searchText: String? = nil, sortingOptions: SortingOptionType? = nil, restaurants: [Restaurant], expectedOutput: [Restaurant], sortingOptionsManager: SortingOptionsManager = MockSortOptionLoader()) {
@@ -214,8 +214,8 @@ final class RestaurantsListViewModelTests: XCTestCase {
         NSError(domain: "Test", code: 404)
     }
     
-    private func getSortOptionLoader(sortOption: SortingOptionType? = nil) -> SortingOptionsManager {
-        return MockSortOptionLoader(sortOption: sortOption)
+    private func getSortingOptionsManager(sortingOptionType: SortingOptionType? = nil) -> SortingOptionsManager {
+        return MockSortOptionLoader(sortingOptionType: sortingOptionType)
     }
     
     func test_title() {
@@ -227,16 +227,16 @@ final class RestaurantsListViewModelTests: XCTestCase {
 
 private final class MockSortOptionLoader: SortingOptionsManager {
     
-    private var sortOption: SortingOptionType?
+    private var sortingOptionType: SortingOptionType?
     
-    init(sortOption: SortingOptionType? = nil) {
-        self.sortOption = sortOption
+    init(sortingOptionType: SortingOptionType? = nil) {
+        self.sortingOptionType = sortingOptionType
     }
     
     func save(_ rawValue: Int) {  }
     
     func getSortingOption() -> SortingOptionType? {
-        return sortOption
+        return sortingOptionType
     }
 }
 

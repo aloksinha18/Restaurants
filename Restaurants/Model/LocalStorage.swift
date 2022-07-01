@@ -15,7 +15,7 @@ struct LocalStorage: SortingOptionsManager {
     }
     
     func save(_ rawValue: Int) {
-        localStoragePresentable.saveToLocal(rawValue)
+        localStoragePresentable.saveSortingOptionToLocal(rawValue)
     }
     
     func getSortingOption() -> SortingOptionType? {
@@ -29,7 +29,7 @@ struct UserDefaultStorage: LocalStoragePresentable {
     
     let userDefault = UserDefaults.standard
     
-    func saveToLocal(_ rawValue: Int) {
+    func saveSortingOptionToLocal(_ rawValue: Int) {
         userDefault.set(rawValue, forKey: UserDefaultStorage.key)
     }
     

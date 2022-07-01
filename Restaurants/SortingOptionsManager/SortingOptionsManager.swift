@@ -13,6 +13,6 @@ protocol SortingOptionsManager {
 }
 
 protocol LocalStoragePresentable {
-    func saveToLocal(_ rawValue: Int)
+    func saveSortingOptionToLocal(_ rawValue: Int)
     func retrieveSortingOptionFromLocal() -> SortingOptionType?
 }
