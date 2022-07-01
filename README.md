@@ -43,4 +43,10 @@ MVVM
 
 ![Simulator Screen Shot - iPhone 13 - 2022-07-01 at 17 14 17](https://user-images.githubusercontent.com/30017908/176922067-f6df07d1-9a1c-4b4c-b745-56d0bf71ea56.png)
 
+## About the project
+This is a `xcode project` application.
+- Deployment Target iOS 15.0
+- Xcode version 13.1
 
+## Running the project
+Open this project in xcode and select the scheme `Restaurants` and select the simulator (should have iOS version 15.0 or higher) and the Run the application .
