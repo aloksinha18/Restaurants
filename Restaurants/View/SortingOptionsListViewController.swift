@@ -40,7 +40,6 @@ final class SortingOptionsListViewController: UITableViewController {
     // MARK: - Table view data source
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of sections
         return viewModel.sortingOptions.count
     }
 

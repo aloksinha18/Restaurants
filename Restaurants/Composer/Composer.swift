@@ -13,14 +13,14 @@ class Composer {
         let store = LocalRestaurantStore()
         let loader = LocalRestaurantLoader(store: store)
         let userDefaultStorage = UserDefaultStorage()
-        let sortingOptionsManager = LocalStorage(loader: userDefaultStorage)
+        let sortingOptionsManager = LocalStorage(localStoragePresentable: userDefaultStorage)
         let viewModel = RestaurantsListViewModel(loader: loader, sortingOptionsManager: sortingOptionsManager)
         let controller = RestaurantsListViewController(viewModel: viewModel)
         let navigationController = UINavigationController(rootViewController: controller)
         let sortingOptionsViewController = SortingOptionsListViewController(viewModel: SortingOptionsListViewModel())
 
         controller.didStartSearch = { searchedText in
-            viewModel.sortedRestaurantsByNameAndNotify(searchedText)
+            viewModel.sortRestaurantsByNameAndNotify(searchedText)
         }
         
         controller.didCancelSearch = {
@@ -32,7 +32,7 @@ class Composer {
         }
         
         sortingOptionsViewController.selectSortingOption = { sortingOption in
-            viewModel.sortedResultsBySortOption(sortingOption)
+            viewModel.sortRestaurantsBySortOption(sortingOption)
             navigationController.popToRootViewController(animated: true)
         }
         

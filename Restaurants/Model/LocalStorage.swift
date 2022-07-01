@@ -7,44 +7,36 @@
 
 import Foundation
 
-protocol SortingOptionsManager {
-    func save(_ rawValue: Int)
-    func getSortingOption() -> SortingOptionType?
+struct LocalStorage: SortingOptionsManager {
+    private let localStoragePresentable: LocalStoragePresentable
+    
+    init(localStoragePresentable: LocalStoragePresentable) {
+        self.localStoragePresentable = localStoragePresentable
+    }
+    
+    func save(_ rawValue: Int) {
+        localStoragePresentable.saveToLocal(rawValue)
+    }
+    
+    func getSortingOption() -> SortingOptionType? {
+        localStoragePresentable.retrieveSortingOptionFromLocal()
+    }
 }
 
-protocol LocalStoragePresentable {
-    func saveToLocal(_ rawValue: Int)
-    func retrieveSortingOptionFromLocal() -> SortingOptionType?
-}
 
 struct UserDefaultStorage: LocalStoragePresentable {
+    static let key = "sortOption"
     
     let userDefault = UserDefaults.standard
     
     func saveToLocal(_ rawValue: Int) {
-        userDefault.set(rawValue, forKey: "sortOption")
+        userDefault.set(rawValue, forKey: UserDefaultStorage.key)
     }
     
     func retrieveSortingOptionFromLocal() -> SortingOptionType? {
-        if let rawValue =  userDefault.value(forKey: "sortOption") as? Int, let filter = SortingOptionType(rawValue: rawValue) {
+        if let rawValue =  userDefault.value(forKey: UserDefaultStorage.key) as? Int, let filter = SortingOptionType(rawValue: rawValue) {
             return filter
         }
         return nil
-    }
-}
-
-struct LocalStorage: SortingOptionsManager {
-    private let loader: LocalStoragePresentable
-    
-    init(loader: LocalStoragePresentable) {
-        self.loader = loader
-    }
-    
-    func save(_ rawValue: Int) {
-        loader.saveToLocal(rawValue)
-    }
-    
-    func getSortingOption() -> SortingOptionType? {
-        loader.retrieveSortingOptionFromLocal()
     }
 }

@@ -30,6 +30,7 @@
 		16E3EAE8286BA2E100C1A1CE /* SortingOptionsListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16E3EAE7286BA2E100C1A1CE /* SortingOptionsListViewController.swift */; };
 		16F30678286F1EEF0048FDC6 /* AccessibilityIdentifiers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16F30677286F1EEF0048FDC6 /* AccessibilityIdentifiers.swift */; };
 		16F3067B286F22CE0048FDC6 /* AccessibilityIdentifiers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16F30677286F1EEF0048FDC6 /* AccessibilityIdentifiers.swift */; };
+		16F3067E286F2EDB0048FDC6 /* SortingOptionsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16F3067D286F2EDB0048FDC6 /* SortingOptionsManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -76,6 +77,7 @@
 		16E3EAE5286BA25900C1A1CE /* SortingOptionsListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SortingOptionsListViewModel.swift; sourceTree = "<group>"; };
 		16E3EAE7286BA2E100C1A1CE /* SortingOptionsListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SortingOptionsListViewController.swift; sourceTree = "<group>"; };
 		16F30677286F1EEF0048FDC6 /* AccessibilityIdentifiers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccessibilityIdentifiers.swift; sourceTree = "<group>"; };
+		16F3067D286F2EDB0048FDC6 /* SortingOptionsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SortingOptionsManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -145,13 +147,14 @@
 			children = (
 				16F30676286F1EC60048FDC6 /* Accessibility */,
 				162A1F9E286E4AF600133B77 /* Composer */,
-				16B2BAF1286A625E002888C0 /* Resource */,
 				16B2BAD72869104E002888C0 /* Model */,
 				16B2BAEC286A5AEC002888C0 /* View */,
 				16B2BAE9286A4D02002888C0 /* ViewModel */,
 				16B2BADF2869128B002888C0 /* RestaurantLoader */,
-				16B2BAA5286908D2002888C0 /* AppDelegate.swift */,
+				16F3067C286F2EB80048FDC6 /* SortingOptionsManager */,
 				16B2BAA7286908D2002888C0 /* SceneDelegate.swift */,
+				16B2BAA5286908D2002888C0 /* AppDelegate.swift */,
+				16B2BAF1286A625E002888C0 /* Resource */,
 				16B2BAAE286908D6002888C0 /* Assets.xcassets */,
 				16B2BAB0286908D6002888C0 /* LaunchScreen.storyboard */,
 				16B2BAB3286908D6002888C0 /* Info.plist */,
@@ -237,6 +240,14 @@
 				16F30677286F1EEF0048FDC6 /* AccessibilityIdentifiers.swift */,
 			);
 			path = Accessibility;
+			sourceTree = "<group>";
+		};
+		16F3067C286F2EB80048FDC6 /* SortingOptionsManager */ = {
+			isa = PBXGroup;
+			children = (
+				16F3067D286F2EDB0048FDC6 /* SortingOptionsManager.swift */,
+			);
+			path = SortingOptionsManager;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -370,6 +381,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				16F3067E286F2EDB0048FDC6 /* SortingOptionsManager.swift in Sources */,
 				16B2BAF5286A63F2002888C0 /* RestaurantListTableViewCell.swift in Sources */,
 				16B2BAE1286912B4002888C0 /* RestaurantLoader.swift in Sources */,
 				16E3EAE8286BA2E100C1A1CE /* SortingOptionsListViewController.swift in Sources */,
