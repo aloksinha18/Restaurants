@@ -34,26 +34,21 @@ class LocalRestaurantLoader: RestaurantLoader {
             guard let self = self else { return }
             switch result {
             case .success(let data):
-                do {
-                    let items = try self.parseResponse(data: data)
-                    completion(items)
-                } catch {
-                    completion(.failure(Error.invalidData))
-                }
+                completion(self.parseResponse(data))
             case .failure:
                 completion(.failure(Error.fileNotFound))
             }
         }
     }
     
-    private func parseResponse(data: Data) throws -> RestaurantLoader.Result {
+    private func parseResponse(_ data: Data)  -> RestaurantLoader.Result {
         let decoder = JSONDecoder()
         
         do {
             let iems =  try decoder.decode(Root.self, from: data)
             return .success(iems.restaurants)
         } catch {
-            throw LocalRestaurantLoader.Error.invalidData
+            return .failure(Error.invalidData)
         }
     }
 }
