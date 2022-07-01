@@ -103,7 +103,7 @@ final class RestaurantsListViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: ReuseIdentifier.cell, for: indexPath) as! RestaurantListTableViewCell
-        cell.configure(viewModel.filteredList[indexPath.row], sortOption: viewModel.selectedSortingOption)
+        cell.configure(viewModel: viewModel.cellViewModel(for: indexPath))
         return cell
     }
 }

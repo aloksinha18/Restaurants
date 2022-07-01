@@ -23,13 +23,13 @@ class RestaurantsListViewModel {
     
     var selectedSortingOption: SortingOptionType?
     
+    var title: String {
+        "Restaurants"
+    }
+    
     init(loader: RestaurantLoader, sortingOptionsManager: SortingOptionsManager) {
         self.loader = loader
         self.sortingOptionsManager = sortingOptionsManager
-    }
-    
-    var title: String {
-        "Restaurants"
     }
     
     func load() {
@@ -71,6 +71,10 @@ class RestaurantsListViewModel {
         self.filteredList = restaurants
         self.searchInput = nil
         onUpdate?()
+    }
+    
+    func cellViewModel(for index: IndexPath) -> RestaurantListTableViewCellViewModel {
+        RestaurantListTableViewCellViewModel(restaurant: filteredList[index.row], sortingOptionType: selectedSortingOption)
     }
     
     private func sortRestaurantsByFilterType(_ filterType: SortingOptionType, input: [Restaurant]) -> [Restaurant] {

@@ -158,7 +158,7 @@ final class RestaurantsListViewModelTests: XCTestCase {
         sut.load()
         
         sut.onLoad = {
-            sut.sortedRestaurantsByNameAndNotify("first")
+            sut.sortRestaurantsByNameAndNotify("first")
             sut.removeSearchAndNotify()
             XCTAssertEqual(sut.filteredList, [thirdRestaurant, fourthRestaurant, secondRestaurant, fifthRestaurant, firstRestaurant])
             expectation.fulfill()
@@ -187,11 +187,11 @@ final class RestaurantsListViewModelTests: XCTestCase {
         sut.load()
         if let option = sortingOptions {
             sut.onLoad = {
-                sut.sortedResultsBySortOption(option)
+                sut.sortRestaurantsBySortOption(option)
             }
         } else if let text = searchText {
             sut.onLoad = {
-                sut.sortedRestaurantsByNameAndNotify(text)
+                sut.sortRestaurantsByNameAndNotify(text)
                 
             }
         } else {
