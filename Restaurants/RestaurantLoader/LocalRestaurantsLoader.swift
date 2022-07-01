@@ -9,7 +9,16 @@ import Foundation
 
 class LocalRestaurantLoader: RestaurantLoader {
     
-    enum Error: Swift.Error {
+    enum Error: Swift.Error, LocalizedError {
+        var errorDescription: String? {
+            switch self {
+            case .invalidData:
+                return "Invalid data!"
+            case .fileNotFound:
+                return "File is not Found!"
+            }
+        }
+        
         case invalidData
         case fileNotFound
     }

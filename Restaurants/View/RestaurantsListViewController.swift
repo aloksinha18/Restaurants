@@ -60,14 +60,26 @@ final class RestaurantsListViewController: UITableViewController {
     private func bind() {
         viewModel.onLoad = loadTableView
         viewModel.onUpdate = loadTableView
+        viewModel.onFail = { [weak self] error in
+            guard let self = self else {
+                return
+            }
+            self.showError(error)
+        }
     }
     
-    func registerTableView() {
+    private func showError(_ error: Error) {
+        let alert = UIAlertController(title: "Error", message: error.localizedDescription, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+        self.present(alert, animated: true, completion: nil)
+    }
+    
+    private func registerTableView() {
         tableView.accessibilityIdentifier = AccessibilityIdentifiers.tableView
         tableView.register(RestaurantListTableViewCell.self, forCellReuseIdentifier: ReuseIdentifier.cell)
     }
     
-    func loadTableView() {
+    private func loadTableView() {
         tableView.reloadData()
     }
     
@@ -81,7 +93,7 @@ final class RestaurantsListViewController: UITableViewController {
     }
     
     @objc
-    func tapFilters() {
+    private func tapFilters() {
         didTapSortOptions?()
     }
     
