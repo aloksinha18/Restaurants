@@ -77,10 +77,6 @@ final class LocalRestaurantLoaderTests: XCTestCase {
         store.complete(with: dataString.data(using: .utf8)!)
         wait(for: [expectation], timeout: 1.0)
     }
-    
-    private func anyNSError() -> NSError {
-        NSError(domain: "Test", code: 404)
-    }
 }
 
 final private class RestaurantStoreSpy: RestaurantStore {

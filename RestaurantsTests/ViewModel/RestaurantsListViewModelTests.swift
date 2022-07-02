@@ -210,10 +210,6 @@ final class RestaurantsListViewModelTests: XCTestCase {
         wait(for: [expectation], timeout: 1.0)
     }
     
-    private func anyNSError() -> NSError {
-        NSError(domain: "Test", code: 404)
-    }
-    
     private func getSortingOptionsManager(sortingOptionType: SortingOptionType? = nil) -> SortingOptionsManager {
         return MockSortOptionLoader(sortingOptionType: sortingOptionType)
     }
