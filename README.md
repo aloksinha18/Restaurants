@@ -49,4 +49,4 @@ This is a `xcode project` application.
 - Xcode version 13.1
 
 ## Running the project
-Open this project in xcode and select the scheme `Restaurants` and select the simulator (should have iOS version 15.0 or higher) and the Run the application .
+Open this project in xcode and select the scheme `Restaurants` and select the simulator (should have iOS version 15.0 or higher) and Run the application.

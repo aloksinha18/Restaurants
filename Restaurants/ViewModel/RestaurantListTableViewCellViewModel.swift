@@ -9,11 +9,11 @@ import Foundation
 
 struct RestaurantListTableViewCellViewModel {
     private let restaurant: Restaurant
-    private let sortingOptionType: SortingOptionType?
+    private let sortType: SortType?
     
-    init(restaurant: Restaurant, sortingOptionType: SortingOptionType? = nil) {
+    init(restaurant: Restaurant, sortType: SortType? = nil) {
         self.restaurant = restaurant
-        self.sortingOptionType = sortingOptionType
+        self.sortType = sortType
     }
     
     var title: String{
@@ -21,9 +21,9 @@ struct RestaurantListTableViewCellViewModel {
     }
     
     var description: String {
-        guard let sortingOptionType = sortingOptionType else {
+        guard let sortType = sortType else {
             return restaurant.status.rawValue.uppercased()
         }
-        return "\(restaurant.status.rawValue.uppercased()) ,  \(sortingOptionType.description) : \(restaurant.value(sortingOptionType))"
+        return "\(restaurant.status.rawValue.uppercased()) ,  \(sortType.description) : \(restaurant.value(sortType))"
     }
 }

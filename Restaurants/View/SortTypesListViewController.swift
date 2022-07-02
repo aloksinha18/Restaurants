@@ -7,13 +7,13 @@
 
 import UIKit
 
-final class SortingOptionsListViewController: UITableViewController {
+final class SortTypesListViewController: UITableViewController {
     
-    let viewModel: SortingOptionsListViewModel
+    let viewModel: SortTypeListViewModel
     
-    var selectSortingOption:((SortingOptionType)-> Void)?
+    var selectSortType:((SortType)-> Void)?
     
-    init(viewModel: SortingOptionsListViewModel) {
+    init(viewModel: SortTypeListViewModel) {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
     }
@@ -40,23 +40,23 @@ final class SortingOptionsListViewController: UITableViewController {
     // MARK: - Table view data source
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return viewModel.sortingOptions.count
+        return viewModel.sortTypes.count
     }
 
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: ReuseIdentifier.cell, for: indexPath)
-        cell.textLabel?.text = viewModel.sortingOptions[indexPath.row].description
+        cell.textLabel?.text = viewModel.sortTypes[indexPath.row].description
         return cell
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        selectSortingOption?(viewModel.sortingOptions[indexPath.row])
+        selectSortType?(viewModel.sortTypes[indexPath.row])
     }
 }
 
 
-private extension SortingOptionsListViewController {
+private extension SortTypesListViewController {
     enum ReuseIdentifier {
         static let cell = "RestaurantListTableViewCell"
     }

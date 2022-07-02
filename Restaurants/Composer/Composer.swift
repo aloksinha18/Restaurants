@@ -13,18 +13,18 @@ class Composer {
         let store = LocalRestaurantStore()
         let loader = LocalRestaurantLoader(store: store)
         let userDefaultStorage = UserDefaultStorage()
-        let sortingOptionsManager = LocalStorage(localStoragePresentable: userDefaultStorage)
-        let viewModel = RestaurantsListViewModel(restaurantLoader: loader, sortingOptionsManager: sortingOptionsManager)
+        let sortTypeManager = LocalStorage(localStoragePresentable: userDefaultStorage)
+        let viewModel = RestaurantsListViewModel(restaurantLoader: loader, sortTypeManager: sortTypeManager)
         let controller = RestaurantsListViewController(viewModel: viewModel)
         let navigationController = UINavigationController(rootViewController: controller)
-        let sortingOptionsViewController = SortingOptionsListViewController(viewModel: SortingOptionsListViewModel())
+        let sortTypesListViewController = SortTypesListViewController(viewModel: SortTypeListViewModel())
         
-        controller.didTapSortOptions = {
-            navigationController.pushViewController(sortingOptionsViewController, animated: true)
+        controller.didTapSortType = {
+            navigationController.pushViewController(sortTypesListViewController, animated: true)
         }
         
-        sortingOptionsViewController.selectSortingOption = { sortingOption in
-            viewModel.sortRestaurantsBySortOption(sortingOption)
+        sortTypesListViewController.selectSortType = { sortType in
+            viewModel.sortRestaurantsBySortType(sortType)
             navigationController.popToRootViewController(animated: true)
         }
         

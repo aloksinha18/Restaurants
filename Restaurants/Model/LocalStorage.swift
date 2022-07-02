@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct LocalStorage: SortingOptionsManager {
+struct LocalStorage: SortTypeManager {
     private let localStoragePresentable: LocalStoragePresentable
     
     init(localStoragePresentable: LocalStoragePresentable) {
@@ -15,11 +15,11 @@ struct LocalStorage: SortingOptionsManager {
     }
     
     func save(_ rawValue: Int) {
-        localStoragePresentable.saveSortingOptionToLocal(rawValue)
+        localStoragePresentable.saveSortTypeToLocal(rawValue)
     }
     
-    func getSortingOption() -> SortingOptionType? {
-        localStoragePresentable.retrieveSortingOptionFromLocal()
+    func getSortType() -> SortType? {
+        localStoragePresentable.retrieveSortTypeFromLocal()
     }
 }
 
@@ -29,13 +29,13 @@ struct UserDefaultStorage: LocalStoragePresentable {
     
     let userDefault = UserDefaults.standard
     
-    func saveSortingOptionToLocal(_ rawValue: Int) {
+    func saveSortTypeToLocal(_ rawValue: Int) {
         userDefault.set(rawValue, forKey: UserDefaultStorage.key)
     }
     
-    func retrieveSortingOptionFromLocal() -> SortingOptionType? {
-        if let rawValue =  userDefault.value(forKey: UserDefaultStorage.key) as? Int, let filter = SortingOptionType(rawValue: rawValue) {
-            return filter
+    func retrieveSortTypeFromLocal() -> SortType? {
+        if let rawValue =  userDefault.value(forKey: UserDefaultStorage.key) as? Int, let sortingType = SortType(rawValue: rawValue) {
+            return sortingType
         }
         return nil
     }

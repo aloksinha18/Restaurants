@@ -23,7 +23,7 @@ final class RestaurantsListViewController: UITableViewController {
     
     private let viewModel: RestaurantsListViewModel
 
-    var didTapSortOptions:(()-> Void)?
+    var didTapSortType:(()-> Void)?
     
     init(viewModel: RestaurantsListViewModel) {
         self.viewModel = viewModel
@@ -87,12 +87,12 @@ final class RestaurantsListViewController: UITableViewController {
         sortsOptionButton.heightAnchor.constraint(equalToConstant: Layout.height).isActive = true
         sortsOptionButton.trailingAnchor.constraint(equalTo: self.view.layoutMarginsGuide.trailingAnchor, constant: Layout.trailing).isActive = true
         sortsOptionButton.bottomAnchor.constraint(equalTo: self.view.layoutMarginsGuide.bottomAnchor, constant: Layout.bottom).isActive = true
-        sortsOptionButton.addTarget(self, action: #selector(tapFilters), for: .touchUpInside)
+        sortsOptionButton.addTarget(self, action: #selector(tapSortOptionsButton), for: .touchUpInside)
     }
     
     @objc
-    private func tapFilters() {
-        didTapSortOptions?()
+    private func tapSortOptionsButton() {
+        didTapSortType?()
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

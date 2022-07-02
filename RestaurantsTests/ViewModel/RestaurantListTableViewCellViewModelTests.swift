@@ -13,7 +13,7 @@ final class RestaurantListTableViewCellViewModelTests: XCTestCase {
     func test_title_when_sortingOption_isNotNil() {
         let firstRestaurant = getRestaurant(name: "Good Food", status: .statusOpen, distance: 100)
 
-        let sut = RestaurantListTableViewCellViewModel(restaurant: firstRestaurant, sortingOptionType: .distance)
+        let sut = RestaurantListTableViewCellViewModel(restaurant: firstRestaurant, sortType: .distance)
         XCTAssertEqual(sut.title, firstRestaurant.name)
         XCTAssertEqual(sut.description, "OPEN ,  Distance : 100.0")
     }

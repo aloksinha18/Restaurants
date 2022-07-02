@@ -1,5 +1,5 @@
 //
-//  SortingOptionsManager.swift
+//  SortTypeManager.swift
 //  Restaurants
 //
 //  Created by Alok Sinha on 2022-07-01.
@@ -7,12 +7,12 @@
 
 import Foundation
 
-protocol SortingOptionsManager {
+protocol SortTypeManager {
     func save(_ rawValue: Int)
-    func getSortingOption() -> SortingOptionType?
+    func getSortType() -> SortType?
 }
 
 protocol LocalStoragePresentable {
-    func saveSortingOptionToLocal(_ rawValue: Int)
-    func retrieveSortingOptionFromLocal() -> SortingOptionType?
+    func saveSortTypeToLocal(_ rawValue: Int)
+    func retrieveSortTypeFromLocal() -> SortType?
 }

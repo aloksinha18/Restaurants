@@ -16,8 +16,8 @@ struct Restaurant: Codable, Equatable {
     let status: Status
     let sortingValues: SortingValues
     
-    func value(_ filterType: SortingOptionType) -> Float {
-        switch filterType {
+    func value(_ sortType: SortType) -> Float {
+        switch sortType {
         case .bestMatch:
             return sortingValues.bestMatch
         case .newest:

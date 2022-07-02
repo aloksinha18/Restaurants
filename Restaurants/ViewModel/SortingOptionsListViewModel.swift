@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum SortingOptionType: Int, CaseIterable {
+enum SortType: Int, CaseIterable {
     case bestMatch
     case newest
     case ratingAverage
@@ -18,7 +18,7 @@ enum SortingOptionType: Int, CaseIterable {
     case minCost
 }
 
-extension SortingOptionType {
+extension SortType {
     func predicate() -> ((Restaurant, Restaurant) -> Bool) {
         switch self {
         case .bestMatch:
@@ -62,8 +62,8 @@ extension SortingOptionType {
     }
 }
 
-struct SortingOptionsListViewModel {
-    var sortingOptions = SortingOptionType.allCases
+struct SortTypeListViewModel {
+    var sortTypes = SortType.allCases
     
     var title: String {
         "Sorting Options"

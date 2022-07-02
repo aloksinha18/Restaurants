@@ -16,7 +16,7 @@ final class RestaurantsUITests: XCTestCase {
         XCTAssertEqual(table.cells.count, 19)
     }
     
-    func test_sortingOptions() {
+    func test_sortingTypes() {
         let app = XCUIApplication()
         app.launch()
         let button = app.buttons[AccessibilityIdentifiers.sortOptions]
@@ -24,9 +24,9 @@ final class RestaurantsUITests: XCTestCase {
         let table = app.tables[AccessibilityIdentifiers.tableView]
         XCTAssertEqual(table.cells.count, 8)
         
-        let expectedSortingOptions = ["Best match", "Newest", "Rating average", "Distance", "Popularity", "Average product price", "Delivery costs", "Minimum cost"]
+        let expectedSortTypes = ["Best match", "Newest", "Rating average", "Distance", "Popularity", "Average product price", "Delivery costs", "Minimum cost"]
         
-        for (index, element) in expectedSortingOptions.enumerated() {
+        for (index, element) in expectedSortTypes.enumerated() {
             let cells = table.cells
             let cell = cells.element(boundBy: index)
             cell.assetContains(text: element)

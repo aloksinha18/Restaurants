@@ -27,7 +27,7 @@
 		16B2BAF5286A63F2002888C0 /* RestaurantListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16B2BAF4286A63F2002888C0 /* RestaurantListTableViewCell.swift */; };
 		16E3EAE4286B9C6C00C1A1CE /* SortOptionsViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16E3EAE3286B9C6C00C1A1CE /* SortOptionsViewModelTests.swift */; };
 		16E3EAE6286BA25900C1A1CE /* SortingOptionsListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16E3EAE5286BA25900C1A1CE /* SortingOptionsListViewModel.swift */; };
-		16E3EAE8286BA2E100C1A1CE /* SortingOptionsListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16E3EAE7286BA2E100C1A1CE /* SortingOptionsListViewController.swift */; };
+		16E3EAE8286BA2E100C1A1CE /* SortTypesListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16E3EAE7286BA2E100C1A1CE /* SortTypesListViewController.swift */; };
 		16F30678286F1EEF0048FDC6 /* AccessibilityIdentifiers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16F30677286F1EEF0048FDC6 /* AccessibilityIdentifiers.swift */; };
 		16F3067B286F22CE0048FDC6 /* AccessibilityIdentifiers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16F30677286F1EEF0048FDC6 /* AccessibilityIdentifiers.swift */; };
 		16F3067E286F2EDB0048FDC6 /* SortingOptionsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16F3067D286F2EDB0048FDC6 /* SortingOptionsManager.swift */; };
@@ -78,7 +78,7 @@
 		16B2BAF4286A63F2002888C0 /* RestaurantListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantListTableViewCell.swift; sourceTree = "<group>"; };
 		16E3EAE3286B9C6C00C1A1CE /* SortOptionsViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SortOptionsViewModelTests.swift; sourceTree = "<group>"; };
 		16E3EAE5286BA25900C1A1CE /* SortingOptionsListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SortingOptionsListViewModel.swift; sourceTree = "<group>"; };
-		16E3EAE7286BA2E100C1A1CE /* SortingOptionsListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SortingOptionsListViewController.swift; sourceTree = "<group>"; };
+		16E3EAE7286BA2E100C1A1CE /* SortTypesListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SortTypesListViewController.swift; sourceTree = "<group>"; };
 		16F30677286F1EEF0048FDC6 /* AccessibilityIdentifiers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccessibilityIdentifiers.swift; sourceTree = "<group>"; };
 		16F3067D286F2EDB0048FDC6 /* SortingOptionsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SortingOptionsManager.swift; sourceTree = "<group>"; };
 		16F3067F286F38770048FDC6 /* RestaurantListTableViewCellViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantListTableViewCellViewModelTests.swift; sourceTree = "<group>"; };
@@ -230,7 +230,7 @@
 			children = (
 				16B2BAEF286A5B18002888C0 /* RestaurantsListViewController.swift */,
 				16B2BAF4286A63F2002888C0 /* RestaurantListTableViewCell.swift */,
-				16E3EAE7286BA2E100C1A1CE /* SortingOptionsListViewController.swift */,
+				16E3EAE7286BA2E100C1A1CE /* SortTypesListViewController.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -401,7 +401,7 @@
 				16F3067E286F2EDB0048FDC6 /* SortingOptionsManager.swift in Sources */,
 				16B2BAF5286A63F2002888C0 /* RestaurantListTableViewCell.swift in Sources */,
 				16B2BAE1286912B4002888C0 /* RestaurantLoader.swift in Sources */,
-				16E3EAE8286BA2E100C1A1CE /* SortingOptionsListViewController.swift in Sources */,
+				16E3EAE8286BA2E100C1A1CE /* SortTypesListViewController.swift in Sources */,
 				16B2BAD928691073002888C0 /* Restaurant.swift in Sources */,
 				16B2BAE52869EB00002888C0 /* LocalRestaurantStore.swift in Sources */,
 				162A1FA0286E4B0800133B77 /* Composer.swift in Sources */,

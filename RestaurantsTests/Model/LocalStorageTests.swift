@@ -13,37 +13,37 @@ final class LocalStorageTests: XCTestCase {
     func test_retrieving_sortOption_return_nil(){
         let loader = MockUserStorage()
         let sut = LocalStorage(localStoragePresentable: loader)
-        XCTAssertNil(sut.getSortingOption())
+        XCTAssertNil(sut.getSortType())
     }
     
     func test_retrieving_sortOption_afterSaving() {
         let loader = MockUserStorage()
         let sut = LocalStorage(localStoragePresentable: loader)
-        loader.saveSortingOptionToLocal(SortingOptionType.popularity.rawValue)
-        XCTAssertEqual(sut.getSortingOption(), .popularity)
+        loader.saveSortTypeToLocal(SortType.popularity.rawValue)
+        XCTAssertEqual(sut.getSortType(), .popularity)
     }
     
     func test_retrieving_sortOption_after_changing_sortType() {
         let loader = MockUserStorage()
         let sut = LocalStorage(localStoragePresentable: loader)
-        loader.saveSortingOptionToLocal(SortingOptionType.popularity.rawValue)
-        loader.saveSortingOptionToLocal(SortingOptionType.distance.rawValue)
-        XCTAssertEqual(sut.getSortingOption(), .distance)
+        loader.saveSortTypeToLocal(SortType.popularity.rawValue)
+        loader.saveSortTypeToLocal(SortType.distance.rawValue)
+        XCTAssertEqual(sut.getSortType(), .distance)
     }
 }
 
 final class MockUserStorage: LocalStoragePresentable {
    
-    private var filterType: Int?
+    private var sortType: Int?
 
-    func saveSortingOptionToLocal(_ rawValue: Int) {
-        self.filterType = rawValue
+    func saveSortTypeToLocal(_ rawValue: Int) {
+        self.sortType = rawValue
     }
     
-    func retrieveSortingOptionFromLocal() -> SortingOptionType? {
-        guard let rawValue = filterType else {
+    func retrieveSortTypeFromLocal() -> SortType? {
+        guard let rawValue = sortType else {
             return nil
         }
-        return SortingOptionType(rawValue: rawValue)
+        return SortType(rawValue: rawValue)
     }
 }

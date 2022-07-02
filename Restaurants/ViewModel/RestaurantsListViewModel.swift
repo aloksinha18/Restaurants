@@ -10,7 +10,7 @@ import Foundation
 class RestaurantsListViewModel {
     
     private let restaurantLoader: RestaurantLoader
-    private let sortingOptionsManager: SortingOptionsManager
+    private let sortTypeManager: SortTypeManager
     
     private var searchInput: String?
     private var restaurants: [Restaurant] = []
@@ -21,15 +21,15 @@ class RestaurantsListViewModel {
     var onUpdate: (()-> Void)?
     var onFail: ((Error)-> Void)?
     
-    var selectedSortingOption: SortingOptionType?
+    private var selectedSortType: SortType?
     
     var title: String {
         "Restaurants"
     }
     
-    init(restaurantLoader: RestaurantLoader, sortingOptionsManager: SortingOptionsManager) {
+    init(restaurantLoader: RestaurantLoader, sortTypeManager: SortTypeManager) {
         self.restaurantLoader = restaurantLoader
-        self.sortingOptionsManager = sortingOptionsManager
+        self.sortTypeManager = sortTypeManager
     }
     
     func load() {
@@ -54,10 +54,10 @@ class RestaurantsListViewModel {
         onUpdate?()
     }
     
-    func sortRestaurantsBySortOption(_ sortingOptionType: SortingOptionType) {
-        selectedSortingOption = sortingOptionType
-        sortingOptionsManager.save(sortingOptionType.rawValue)
-        let result = sortRestaurantsByFilterType(sortingOptionType, restaurants: restaurants)
+    func sortRestaurantsBySortType(_ sortType: SortType) {
+        selectedSortType = sortType
+        sortTypeManager.save(sortType.rawValue)
+        let result = sortRestaurantsBySortType(sortType, restaurants: restaurants)
         if let searchInput = searchInput {
             let searchedResults  = result.filter { $0.name.hasPrefix(searchInput) }
             sortRestaurantsByStatusAndNotify(restaurants: searchedResults)
@@ -73,11 +73,11 @@ class RestaurantsListViewModel {
     }
     
     func cellViewModel(for index: IndexPath) -> RestaurantListTableViewCellViewModel {
-        RestaurantListTableViewCellViewModel(restaurant: sortedRestaurantsList[index.row], sortingOptionType: selectedSortingOption)
+        RestaurantListTableViewCellViewModel(restaurant: sortedRestaurantsList[index.row], sortType: selectedSortType)
     }
     
-    private func sortRestaurantsByFilterType(_ filterType: SortingOptionType, restaurants: [Restaurant]) -> [Restaurant] {
-        restaurants.sorted(by: filterType.predicate())
+    private func sortRestaurantsBySortType(_ sortType: SortType, restaurants: [Restaurant]) -> [Restaurant] {
+        restaurants.sorted(by: sortType.predicate())
     }
     
     private func sortRestaurantsByStatusAndNotify(restaurants: [Restaurant]) {
@@ -88,14 +88,14 @@ class RestaurantsListViewModel {
     
     private func sortRestaurantsByStatusAndSortOptionIfAny(restaurants: [Restaurant]) -> [Restaurant] {
         
-        guard let sortOption = sortingOptionsManager.getSortingOption() else {
+        guard let sortType = sortTypeManager.getSortType() else {
             let sortedList = self.sortRestaurantsByStatus(restaurants)
             sortedRestaurantsList = sortedList
             return sortedList
         }
-        selectedSortingOption = sortOption
-        let sortByOptions = sortRestaurantsByFilterType(sortOption, restaurants: restaurants)
-        return sortRestaurantsByStatus(sortByOptions)
+        selectedSortType = sortType
+        let sortedRestaurantsBySortType = sortRestaurantsBySortType(sortType, restaurants: restaurants)
+        return sortRestaurantsByStatus(sortedRestaurantsBySortType)
     }
     
     private func sortRestaurantsByStatus(_ input: [Restaurant]) -> [Restaurant] {
