@@ -19,7 +19,7 @@ final class RestaurantsListViewModelTests: XCTestCase {
     
     func test_load_fails_on_error() {
         let loader = MockRestaurantsLoader()
-        let sut = RestaurantsListViewModel(loader: loader, sortingOptionsManager: getSortingOptionsManager())
+        let sut = RestaurantsListViewModel(restaurantLoader: loader, sortingOptionsManager: getSortingOptionsManager())
         sut.load()
         let expectation = expectation(description: "wait for restaurant to load")
         sut.onFail = { error in
@@ -152,7 +152,7 @@ final class RestaurantsListViewModelTests: XCTestCase {
         let fourthRestaurant = getRestaurant(name:"Second", status: .statusOpen)
         let fifthRestaurant = getRestaurant(name:"Second", status: .orderAhead)
         let loader = MockRestaurantsLoader()
-        let sut = RestaurantsListViewModel(loader: loader, sortingOptionsManager: getSortingOptionsManager())
+        let sut = RestaurantsListViewModel(restaurantLoader: loader, sortingOptionsManager: getSortingOptionsManager())
         let expectation = expectation(description: "wait for restaurant to load")
         
         sut.load()
@@ -183,7 +183,7 @@ final class RestaurantsListViewModelTests: XCTestCase {
     private func test(searchText: String? = nil, sortingOptions: SortingOptionType? = nil, restaurants: [Restaurant], expectedOutput: [Restaurant], sortingOptionsManager: SortingOptionsManager = MockSortOptionLoader()) {
         let expectation = expectation(description: "wait for restaurant to load")
         let loader = MockRestaurantsLoader()
-        let sut = RestaurantsListViewModel(loader: loader, sortingOptionsManager: sortingOptionsManager)
+        let sut = RestaurantsListViewModel(restaurantLoader: loader, sortingOptionsManager: sortingOptionsManager)
         sut.load()
         if let option = sortingOptions {
             sut.onLoad = {
@@ -216,7 +216,7 @@ final class RestaurantsListViewModelTests: XCTestCase {
     
     func test_title() {
         let loader = MockRestaurantsLoader()
-        let sut = RestaurantsListViewModel(loader: loader, sortingOptionsManager: MockSortOptionLoader())
+        let sut = RestaurantsListViewModel(restaurantLoader: loader, sortingOptionsManager: MockSortOptionLoader())
         XCTAssertEqual(sut.title, "Restaurants")
     }
 }
