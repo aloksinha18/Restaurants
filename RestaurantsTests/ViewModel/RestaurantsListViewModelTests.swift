@@ -160,7 +160,7 @@ final class RestaurantsListViewModelTests: XCTestCase {
         sut.onLoad = {
             sut.sortRestaurantsByNameAndNotify("first")
             sut.removeSearchAndNotify()
-            XCTAssertEqual(sut.filteredList, [thirdRestaurant, fourthRestaurant, secondRestaurant, fifthRestaurant, firstRestaurant])
+            XCTAssertEqual(sut.sortedRestaurantsList, [thirdRestaurant, fourthRestaurant, secondRestaurant, fifthRestaurant, firstRestaurant])
             expectation.fulfill()
         }
                 
@@ -196,13 +196,13 @@ final class RestaurantsListViewModelTests: XCTestCase {
             }
         } else {
             sut.onLoad = {
-                XCTAssertEqual(sut.filteredList, expectedOutput)
+                XCTAssertEqual(sut.sortedRestaurantsList, expectedOutput)
                 expectation.fulfill()
             }
         }
         
         sut.onUpdate = {
-            XCTAssertEqual(sut.filteredList, expectedOutput)
+            XCTAssertEqual(sut.sortedRestaurantsList, expectedOutput)
             expectation.fulfill()
         }
         

@@ -14,7 +14,7 @@ class Composer {
         let loader = LocalRestaurantLoader(store: store)
         let userDefaultStorage = UserDefaultStorage()
         let sortingOptionsManager = LocalStorage(localStoragePresentable: userDefaultStorage)
-        let viewModel = RestaurantsListViewModel(loader: loader, sortingOptionsManager: sortingOptionsManager)
+        let viewModel = RestaurantsListViewModel(restaurantLoader: loader, sortingOptionsManager: sortingOptionsManager)
         let controller = RestaurantsListViewController(viewModel: viewModel)
         let navigationController = UINavigationController(rootViewController: controller)
         let sortingOptionsViewController = SortingOptionsListViewController(viewModel: SortingOptionsListViewModel())

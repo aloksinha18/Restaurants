@@ -9,13 +9,13 @@ import Foundation
 
 class RestaurantsListViewModel {
     
-    private let loader: RestaurantLoader
+    private let restaurantLoader: RestaurantLoader
     private let sortingOptionsManager: SortingOptionsManager
     
     private var searchInput: String?
     private var restaurants: [Restaurant] = []
     
-    var filteredList: [Restaurant] = []
+    var sortedRestaurantsList: [Restaurant] = []
     
     var onLoad: (()-> Void)?
     var onUpdate: (()-> Void)?
@@ -27,19 +27,19 @@ class RestaurantsListViewModel {
         "Restaurants"
     }
     
-    init(loader: RestaurantLoader, sortingOptionsManager: SortingOptionsManager) {
-        self.loader = loader
+    init(restaurantLoader: RestaurantLoader, sortingOptionsManager: SortingOptionsManager) {
+        self.restaurantLoader = restaurantLoader
         self.sortingOptionsManager = sortingOptionsManager
     }
     
     func load() {
-        loader.load { [weak self] result in
+        restaurantLoader.load { [weak self] result in
             guard let self = self else { return }
             switch result {
             case .success(let restaurants):
-                let sortedList = self.sortRestaurantsByStatusAndSortOptionIfAny(input: restaurants)
+                let sortedList = self.sortRestaurantsByStatusAndSortOptionIfAny(restaurants: restaurants)
                 self.restaurants = sortedList
-                self.filteredList = sortedList
+                self.sortedRestaurantsList = sortedList
                 self.onLoad?()
             case .failure(let error):
                 self.onFail?(error)
@@ -47,55 +47,54 @@ class RestaurantsListViewModel {
         }
     }
     
-    
     func sortRestaurantsByNameAndNotify(_ input: String)  {
         searchInput = input
         let result = restaurants.filter { $0.name.hasPrefix(input) }
-        self.filteredList = result
+        self.sortedRestaurantsList = result
         onUpdate?()
     }
     
-    func sortRestaurantsBySortOption(_ input: SortingOptionType) {
-        selectedSortingOption = input
-        sortingOptionsManager.save(input.rawValue)
-        let result = sortRestaurantsByFilterType(input, input: restaurants)
+    func sortRestaurantsBySortOption(_ sortingOptionType: SortingOptionType) {
+        selectedSortingOption = sortingOptionType
+        sortingOptionsManager.save(sortingOptionType.rawValue)
+        let result = sortRestaurantsByFilterType(sortingOptionType, restaurants: restaurants)
         if let searchInput = searchInput {
             let searchedResults  = result.filter { $0.name.hasPrefix(searchInput) }
-            sortRestaurantsByStatusAndNotify(input: searchedResults)
+            sortRestaurantsByStatusAndNotify(restaurants: searchedResults)
         } else {
-            sortRestaurantsByStatusAndNotify(input: result)
+            sortRestaurantsByStatusAndNotify(restaurants: result)
         }
     }
     
     func removeSearchAndNotify() {
-        self.filteredList = restaurants
+        self.sortedRestaurantsList = restaurants
         self.searchInput = nil
         onUpdate?()
     }
     
     func cellViewModel(for index: IndexPath) -> RestaurantListTableViewCellViewModel {
-        RestaurantListTableViewCellViewModel(restaurant: filteredList[index.row], sortingOptionType: selectedSortingOption)
+        RestaurantListTableViewCellViewModel(restaurant: sortedRestaurantsList[index.row], sortingOptionType: selectedSortingOption)
     }
     
-    private func sortRestaurantsByFilterType(_ filterType: SortingOptionType, input: [Restaurant]) -> [Restaurant] {
-        input.sorted(by: filterType.predicate())
+    private func sortRestaurantsByFilterType(_ filterType: SortingOptionType, restaurants: [Restaurant]) -> [Restaurant] {
+        restaurants.sorted(by: filterType.predicate())
     }
     
-    private func sortRestaurantsByStatusAndNotify(input: [Restaurant]) {
-        let finalResult = sortRestaurantsByStatus(input)
-        self.filteredList = finalResult
+    private func sortRestaurantsByStatusAndNotify(restaurants: [Restaurant]) {
+        let finalResult = sortRestaurantsByStatus(restaurants)
+        self.sortedRestaurantsList = finalResult
         onUpdate?()
     }
     
-    private func sortRestaurantsByStatusAndSortOptionIfAny(input: [Restaurant]) -> [Restaurant] {
+    private func sortRestaurantsByStatusAndSortOptionIfAny(restaurants: [Restaurant]) -> [Restaurant] {
         
         guard let sortOption = sortingOptionsManager.getSortingOption() else {
-            let sortedList = self.sortRestaurantsByStatus(input)
-            filteredList = sortedList
+            let sortedList = self.sortRestaurantsByStatus(restaurants)
+            sortedRestaurantsList = sortedList
             return sortedList
         }
         selectedSortingOption = sortOption
-        let sortByOptions = sortRestaurantsByFilterType(sortOption, input: input)
+        let sortByOptions = sortRestaurantsByFilterType(sortOption, restaurants: restaurants)
         return sortRestaurantsByStatus(sortByOptions)
     }
     
