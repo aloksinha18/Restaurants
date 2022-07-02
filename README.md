@@ -39,9 +39,12 @@ MVVM
 
 ## Screenshot
 
-![Simulator Screen Shot - iPhone 13 - 2022-07-01 at 17 04 03](https://user-images.githubusercontent.com/30017908/176920546-53452367-aeec-4591-b406-8a804b8bb4a7.png)
+<img src="https://user-images.githubusercontent.com/30017908/176920546-53452367-aeec-4591-b406-8a804b8bb4a7.png" width="300" height="650" />
 
-![Simulator Screen Shot - iPhone 13 - 2022-07-01 at 17 14 17](https://user-images.githubusercontent.com/30017908/176922067-f6df07d1-9a1c-4b4c-b745-56d0bf71ea56.png)
+<img src="https://user-images.githubusercontent.com/30017908/176922067-f6df07d1-9a1c-4b4c-b745-56d0bf71ea56.png" width="300" height="650" />
+
+
+![Simulator Screen Shot - iPhone 13 - 2022-07-01 at 17 14 17])
 
 ## About the project
 This is a `xcode project` application.
@@ -49,4 +52,4 @@ This is a `xcode project` application.
 - Xcode version 13.1
 
 ## Running the project
-Open this project in xcode and select the scheme `Restaurants` and select the simulator (should have iOS version 15.0 or higher) and the Run the application .
+Open this project in xcode and select the scheme `Restaurants` and select the simulator (should have iOS version 15.0 or higher) and run the application .
