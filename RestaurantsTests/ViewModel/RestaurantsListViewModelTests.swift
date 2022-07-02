@@ -169,7 +169,7 @@ final class RestaurantsListViewModelTests: XCTestCase {
         wait(for: [expectation], timeout: 1.0)
     }
     
-    func test_load_success_with_persistant_sortType() {
+    func test_load_success_with_persistant_sortTypeDistance() {
         let firstRestaurant = getRestaurant(status: .closed, distance: 23)
         let secondRestaurant = getRestaurant(status: .orderAhead, distance: 46)
         let thirdRestaurant = getRestaurant(status: .statusOpen, distance: 156)
