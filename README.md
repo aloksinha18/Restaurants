@@ -44,8 +44,6 @@ MVVM
 <img src="https://user-images.githubusercontent.com/30017908/176922067-f6df07d1-9a1c-4b4c-b745-56d0bf71ea56.png" width="300" height="650" />
 
 
-![Simulator Screen Shot - iPhone 13 - 2022-07-01 at 17 14 17])
-
 ## About the project
 This is a `xcode project` application.
 - Deployment Target iOS 15.0
