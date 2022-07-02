@@ -18,14 +18,6 @@ class Composer {
         let controller = RestaurantsListViewController(viewModel: viewModel)
         let navigationController = UINavigationController(rootViewController: controller)
         let sortingOptionsViewController = SortingOptionsListViewController(viewModel: SortingOptionsListViewModel())
-
-        controller.didStartSearch = { searchedText in
-            viewModel.sortRestaurantsByNameAndNotify(searchedText)
-        }
-        
-        controller.didCancelSearch = {
-            viewModel.removeSearchAndNotify()
-        }
         
         controller.didTapSortOptions = {
             navigationController.pushViewController(sortingOptionsViewController, animated: true)

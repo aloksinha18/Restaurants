@@ -23,8 +23,6 @@ final class RestaurantsListViewController: UITableViewController {
     
     private let viewModel: RestaurantsListViewModel
 
-    var didStartSearch:((String)-> Void)?
-    var didCancelSearch:(()-> Void)?
     var didTapSortOptions:(()-> Void)?
     
     init(viewModel: RestaurantsListViewModel) {
@@ -114,18 +112,18 @@ extension RestaurantsListViewController: UISearchResultsUpdating, UISearchBarDel
         guard let text = searchController.searchBar.text, !text.isEmpty else {
             return
         }
-        didStartSearch?(text)
+        viewModel.sortRestaurantsByNameAndNotify(text)
     }
     
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
-        didCancelSearch?()
+        viewModel.removeSearchAndNotify()
     }
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         guard let text = searchBar.text , text.isEmpty else {
             return
         }
-        didCancelSearch?()
+        viewModel.removeSearchAndNotify()
     }
 }
 
